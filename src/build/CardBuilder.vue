@@ -9,26 +9,38 @@
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="parts.arms[0].src" title="left arm" />
-        <button class="prev-selector">&#9650;</button>
-        <button class="next-selector">&#9660;</button>
+        <img :src="parts.arms[selectedLeftArmIndex].src" title="left arm" />
+        <button @click="selectPrevLeftArm()" class="prev-selector">
+          &#9650;
+        </button>
+        <button @click="selectNextLeftArm()" class="next-selector">
+          &#9660;
+        </button>
       </div>
       <div class="center part">
-        <img :src="parts.torsos[0].src" title="left arm" />
-        <button class="prev-selector">&#9668;</button>
-        <button class="next-selector">&#9658;</button>
+        <img :src="parts.torsos[selectedTorsoIndex].src" title="torso" />
+        <button @click="selectPrevTorso()" class="prev-selector">
+          &#9668;
+        </button>
+        <button @click="selectNextTorso()" class="next-selector">
+          &#9658;
+        </button>
       </div>
       <div class="right part">
-        <img :src="parts.arms[0].src" title="left arm" />
-        <button class="prev-selector">&#9650;</button>
-        <button class="next-selector">&#9660;</button>
+        <img :src="parts.arms[selectedRightArmIndex].src" title="right arm" />
+        <button @click="selectPrevRightArm()" class="prev-selector">
+          &#9650;
+        </button>
+        <button @click="selectNextRightArm()" class="next-selector">
+          &#9660;
+        </button>
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="parts.bases[0].src" title="left arm" />
-        <button class="prev-selector">&#9668;</button>
-        <button class="next-selector">&#9658;</button>
+        <img :src="parts.bases[selectedBaseIndex].src" title="legs" />
+        <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
+        <button @click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
     </div>
   </div>
@@ -36,32 +48,111 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import parts from "@/data/data";
+import parts, { Part } from "@/data/data";
 
 @Component
 export default class CardBuilder extends Vue {
   @Prop({ default: 0 })
   selectedHeadIndex!: number;
+  @Prop({ default: 0 })
+  selectedLeftArmIndex!: number;
+  @Prop({ default: 0 })
+  selectedRightArmIndex!: number;
+  @Prop({ default: 0 })
+  selectedTorsoIndex!: number;
+  @Prop({ default: 0 })
+  selectedBaseIndex!: number;
 
   data() {
     return { parts };
   }
 
-  selectNextHead(): void {
-    console.log("select next head called");
-    if (parts.heads.length > this.selectedHeadIndex) {
-      this.selectedHeadIndex += 1;
+  getNextIndex(parts: Part[], index: number): number {
+    if (parts.length > index) {
+      index += 1;
     } else {
-      this.selectedHeadIndex = 0;
+      index = 0;
     }
+    return index;
+  }
+
+  getPrevIndex(parts: Part[], index: number): number {
+    if (index > 0) {
+      index -= 1;
+    } else {
+      index = parts.length - 1;
+    }
+    return index;
+  }
+
+  selectNextHead(): void {
+    this.selectedHeadIndex = this.getNextIndex(
+      parts.heads,
+      this.selectedHeadIndex
+    );
   }
 
   selectPrevHead(): void {
-    if (this.selectedHeadIndex > 0) {
-      this.selectedHeadIndex -= 1;
-    } else {
-      this.selectedHeadIndex = parts.heads.length - 1;
-    }
+    this.selectedHeadIndex = this.getPrevIndex(
+      parts.heads,
+      this.selectedHeadIndex
+    );
+  }
+
+  selectNextLeftArm(): void {
+    this.selectedLeftArmIndex = this.getNextIndex(
+      parts.arms,
+      this.selectedLeftArmIndex
+    );
+  }
+
+  selectPrevLeftArm(): void {
+    this.selectedLeftArmIndex = this.getPrevIndex(
+      parts.arms,
+      this.selectedLeftArmIndex
+    );
+  }
+
+  selectNextRightArm(): void {
+    this.selectedRightArmIndex = this.getNextIndex(
+      parts.arms,
+      this.selectedRightArmIndex
+    );
+  }
+
+  selectPrevRightArm(): void {
+    this.selectedRightArmIndex = this.getPrevIndex(
+      parts.arms,
+      this.selectedRightArmIndex
+    );
+  }
+
+  selectNextBase(): void {
+    this.selectedBaseIndex = this.getNextIndex(
+      parts.bases,
+      this.selectedBaseIndex
+    );
+  }
+
+  selectPrevBase(): void {
+    this.selectedBaseIndex = this.getPrevIndex(
+      parts.bases,
+      this.selectedBaseIndex
+    );
+  }
+
+  selectNextTorso(): void {
+    this.selectedTorsoIndex = this.getNextIndex(
+      parts.torsos,
+      this.selectedTorsoIndex
+    );
+  }
+
+  selectPrevTorso(): void {
+    this.selectedTorsoIndex = this.getPrevIndex(
+      parts.torsos,
+      this.selectedTorsoIndex
+    );
   }
 }
 </script>
