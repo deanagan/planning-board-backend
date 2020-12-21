@@ -1,15 +1,23 @@
 const images = require.context("@/assets/parts", true, /\.png$/);
 
-// export interface Part {
-//   id: number;
-//   description: string;
-//   title: string;
-//   src: string;
-//   type: string;
-//   cost: number;
-// }
+export interface Part {
+  id: number;
+  description: string;
+  title: string;
+  src: string;
+  type: string;
+  cost: number;
+  onSale?: boolean;
+}
 
-const parts = {
+export interface BodyParts {
+  heads: Part[];
+  arms: Part[];
+  torsos: Part[];
+  bases: Part[];
+}
+
+const parts: BodyParts = {
   heads: [
     {
       id: 1,
