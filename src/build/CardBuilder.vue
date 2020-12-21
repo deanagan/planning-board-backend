@@ -2,14 +2,14 @@
   <div>
     <div class="top-row">
       <div class="top part">
-        <img :src="parts.heads[selectedHeadIndex].src" title="head" />
+        <img :src="buildSource.head" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
       </div>
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="parts.arms[selectedLeftArmIndex].src" title="left arm" />
+        <img :src="buildSource.leftArm" title="left arm" />
         <button @click="selectPrevLeftArm()" class="prev-selector">
           &#9650;
         </button>
@@ -18,7 +18,7 @@
         </button>
       </div>
       <div class="center part">
-        <img :src="parts.torsos[selectedTorsoIndex].src" title="torso" />
+        <img :src="buildSource.torso" title="torso" />
         <button @click="selectPrevTorso()" class="prev-selector">
           &#9668;
         </button>
@@ -27,7 +27,7 @@
         </button>
       </div>
       <div class="right part">
-        <img :src="parts.arms[selectedRightArmIndex].src" title="right arm" />
+        <img :src="buildSource.rightArm" title="right arm" />
         <button @click="selectPrevRightArm()" class="prev-selector">
           &#9650;
         </button>
@@ -38,7 +38,7 @@
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="parts.bases[selectedBaseIndex].src" title="legs" />
+        <img :src="buildSource.base" title="legs" />
         <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
         <button @click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
@@ -49,26 +49,52 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts, { Part } from "@/data/data";
+import { PropType } from "vue";
+
+interface BuildSources {
+  head: string;
+  leftArm: string;
+  rightArm: string;
+  torso: string;
+  base: string;
+}
+
+class Built {
+  constructor(
+    public headIndex: number = 0,
+    public leftArmIndex: number = 0,
+    public rightArmIndex: number = 0,
+    public torsoIndex: number = 0,
+    public baseIndex: number = 0
+  ) {}
+
+  getBuild(): BuildSources {
+    return {
+      head: parts.heads[this.headIndex].src,
+      leftArm: parts.arms[this.leftArmIndex].src,
+      rightArm: parts.arms[this.rightArmIndex].src,
+      torso: parts.torsos[this.torsoIndex].src,
+      base: parts.bases[this.baseIndex].src
+    };
+  }
+}
 
 @Component
 export default class CardBuilder extends Vue {
-  @Prop({ default: 0 })
-  selectedHeadIndex!: number;
-  @Prop({ default: 0 })
-  selectedLeftArmIndex!: number;
-  @Prop({ default: 0 })
-  selectedRightArmIndex!: number;
-  @Prop({ default: 0 })
-  selectedTorsoIndex!: number;
-  @Prop({ default: 0 })
-  selectedBaseIndex!: number;
+  @Prop({
+    type: Object as PropType<Built>,
+    default: () => new Built()
+  })
+  builtCard!: Built;
 
-  data() {
-    return { parts };
+  @Prop({ default: 0 }) private index!: number;
+
+  get buildSource(): BuildSources {
+    return this.builtCard.getBuild();
   }
 
   getNextIndex(parts: Part[], index: number): number {
-    if (parts.length > index) {
+    if (parts.length - 1 > index) {
       index += 1;
     } else {
       index = 0;
@@ -86,72 +112,72 @@ export default class CardBuilder extends Vue {
   }
 
   selectNextHead(): void {
-    this.selectedHeadIndex = this.getNextIndex(
+    this.builtCard.headIndex = this.getNextIndex(
       parts.heads,
-      this.selectedHeadIndex
+      this.builtCard.headIndex
     );
   }
 
   selectPrevHead(): void {
-    this.selectedHeadIndex = this.getPrevIndex(
+    this.builtCard.headIndex = this.getPrevIndex(
       parts.heads,
-      this.selectedHeadIndex
+      this.builtCard.headIndex
     );
   }
 
   selectNextLeftArm(): void {
-    this.selectedLeftArmIndex = this.getNextIndex(
+    this.builtCard.leftArmIndex = this.getNextIndex(
       parts.arms,
-      this.selectedLeftArmIndex
+      this.builtCard.leftArmIndex
     );
   }
 
   selectPrevLeftArm(): void {
-    this.selectedLeftArmIndex = this.getPrevIndex(
+    this.builtCard.leftArmIndex = this.getPrevIndex(
       parts.arms,
-      this.selectedLeftArmIndex
+      this.builtCard.leftArmIndex
     );
   }
 
   selectNextRightArm(): void {
-    this.selectedRightArmIndex = this.getNextIndex(
+    this.builtCard.rightArmIndex = this.getNextIndex(
       parts.arms,
-      this.selectedRightArmIndex
+      this.builtCard.rightArmIndex
     );
   }
 
   selectPrevRightArm(): void {
-    this.selectedRightArmIndex = this.getPrevIndex(
+    this.builtCard.rightArmIndex = this.getPrevIndex(
       parts.arms,
-      this.selectedRightArmIndex
+      this.builtCard.rightArmIndex
     );
   }
 
   selectNextBase(): void {
-    this.selectedBaseIndex = this.getNextIndex(
+    this.builtCard.baseIndex = this.getNextIndex(
       parts.bases,
-      this.selectedBaseIndex
+      this.builtCard.baseIndex
     );
   }
 
   selectPrevBase(): void {
-    this.selectedBaseIndex = this.getPrevIndex(
+    this.builtCard.baseIndex = this.getPrevIndex(
       parts.bases,
-      this.selectedBaseIndex
+      this.builtCard.baseIndex
     );
   }
 
   selectNextTorso(): void {
-    this.selectedTorsoIndex = this.getNextIndex(
+    this.builtCard.torsoIndex = this.getNextIndex(
       parts.torsos,
-      this.selectedTorsoIndex
+      this.builtCard.torsoIndex
     );
   }
 
   selectPrevTorso(): void {
-    this.selectedTorsoIndex = this.getPrevIndex(
+    this.builtCard.torsoIndex = this.getPrevIndex(
       parts.torsos,
-      this.selectedTorsoIndex
+      this.builtCard.torsoIndex
     );
   }
 }
