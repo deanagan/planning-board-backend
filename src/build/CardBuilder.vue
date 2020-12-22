@@ -1,15 +1,22 @@
 <template>
-  <div>
+  <div class="content">
+    <button class="save-to-gallery" @click="saveToGallery()">
+      Save to Gallery
+    </button>
     <div class="top-row">
+      <div class="build-name">
+        {{ buildSource.head.title }}
+        <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
+      </div>
       <div class="top part">
-        <img :src="buildSource.head" title="head" />
+        <img :src="buildSource.head.src" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
       </div>
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="buildSource.leftArm" title="left arm" />
+        <img :src="buildSource.leftArm.src" title="left arm" />
         <button @click="selectPrevLeftArm()" class="prev-selector">
           &#9650;
         </button>
@@ -18,7 +25,7 @@
         </button>
       </div>
       <div class="center part">
-        <img :src="buildSource.torso" title="torso" />
+        <img :src="buildSource.torso.src" title="torso" />
         <button @click="selectPrevTorso()" class="prev-selector">
           &#9668;
         </button>
@@ -27,7 +34,7 @@
         </button>
       </div>
       <div class="right part">
-        <img :src="buildSource.rightArm" title="right arm" />
+        <img :src="buildSource.rightArm.src" title="right arm" />
         <button @click="selectPrevRightArm()" class="prev-selector">
           &#9650;
         </button>
@@ -38,7 +45,7 @@
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="buildSource.base" title="legs" />
+        <img :src="buildSource.base.src" title="legs" />
         <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
         <button @click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
@@ -52,11 +59,11 @@ import parts, { Part } from "@/data/data";
 import { PropType } from "vue";
 
 interface BuildSources {
-  head: string;
-  leftArm: string;
-  rightArm: string;
-  torso: string;
-  base: string;
+  head: Part;
+  leftArm: Part;
+  rightArm: Part;
+  torso: Part;
+  base: Part;
 }
 
 class Built {
@@ -70,13 +77,14 @@ class Built {
 
   getBuild(): BuildSources {
     return {
-      head: parts.heads[this.headIndex].src,
-      leftArm: parts.arms[this.leftArmIndex].src,
-      rightArm: parts.arms[this.rightArmIndex].src,
-      torso: parts.torsos[this.torsoIndex].src,
-      base: parts.bases[this.baseIndex].src
+      head: parts.heads[this.headIndex],
+      leftArm: parts.arms[this.leftArmIndex],
+      rightArm: parts.arms[this.rightArmIndex],
+      torso: parts.torsos[this.torsoIndex],
+      base: parts.bases[this.baseIndex]
     };
   }
+
 }
 
 @Component
@@ -87,10 +95,18 @@ export default class CardBuilder extends Vue {
   })
   builtCard!: Built;
 
-  @Prop({ default: 0 }) private index!: number;
+  @Prop({
+    type: Array as PropType<Array<Built>>,
+    default: () => []
+  })
+  savedBuilds!: Array<Built>;
 
   get buildSource(): BuildSources {
     return this.builtCard.getBuild();
+  }
+
+  saveToGallery() {
+    this.savedBuilds.push(this.builtCard);
   }
 
   getNextIndex(parts: Part[], index: number): number {
@@ -272,5 +288,28 @@ export default class CardBuilder extends Vue {
 }
 .right .next-selector {
   right: -3px;
+}
+
+.build-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+
+.content {
+  position: relative;
+}
+
+.hot {
+  color: red;
+}
+
+.save-to-gallery {
+  position: absolute;
+  right: 30px;
+  width: 220px;
+  padding: 3px;
+  font-size: 16px;
 }
 </style>
