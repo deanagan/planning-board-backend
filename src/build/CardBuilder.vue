@@ -54,9 +54,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import parts, { Part } from '@/data/data';
-import { PropType } from 'vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import parts, { Part } from "@/data/data";
+import { PropType } from "vue";
 
 interface BuildSources {
   head: Part;
