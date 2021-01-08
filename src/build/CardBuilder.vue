@@ -8,7 +8,8 @@
         {{ buildSource.head.title }}
         <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
       </div>
-      <div class="top part" :style="[headBorderStyle]">
+      <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
+      <div class="top part" :class="{ 'sale-border': buildSource.head.onSale }">
         <img :src="buildSource.head.src" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
@@ -103,15 +104,6 @@ export default class CardBuilder extends Vue {
   // Computed Start
   get buildSource(): BuildSources {
     return this.builtCard.getBuild();
-  }
-
-  get headBorderStyle() {
-    return {
-      // Conditionally set head border to red if on sale
-      border: this.builtCard.getBuild().head.onSale
-        ? "3px solid red"
-        : "3px solid #aaa"
-    };
   }
 
   // Computed end
@@ -323,4 +315,7 @@ export default class CardBuilder extends Vue {
   font-size: 16px;
 }
 
+.sale-border {
+  border: 3px solid red;
+}
 </style>
