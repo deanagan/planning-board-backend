@@ -73,7 +73,7 @@ class Built {
     public leftArmIndex: number = 0,
     public rightArmIndex: number = 0,
     public torsoIndex: number = 0,
-    public baseIndex: number = 0,
+    public baseIndex: number = 0
   ) {}
 
   getBuild(): BuildSources {
@@ -82,7 +82,7 @@ class Built {
       leftArm: parts.arms[this.leftArmIndex],
       rightArm: parts.arms[this.rightArmIndex],
       torso: parts.torsos[this.torsoIndex],
-      base: parts.bases[this.baseIndex],
+      base: parts.bases[this.baseIndex]
     };
   }
 }
@@ -91,13 +91,13 @@ class Built {
 export default class CardBuilder extends Vue {
   @Prop({
     type: Object as PropType<Built>,
-    default: () => new Built(),
+    default: () => new Built()
   })
   builtCard!: Built;
 
   @Prop({
     type: Array as PropType<Array<Built>>,
-    default: () => [],
+    default: () => []
   })
   savedBuilds!: Array<Built>;
 
@@ -135,70 +135,70 @@ export default class CardBuilder extends Vue {
   selectNextHead(): void {
     this.builtCard.headIndex = this.getNextIndex(
       parts.heads,
-      this.builtCard.headIndex,
+      this.builtCard.headIndex
     );
   }
 
   selectPrevHead(): void {
     this.builtCard.headIndex = this.getPrevIndex(
       parts.heads,
-      this.builtCard.headIndex,
+      this.builtCard.headIndex
     );
   }
 
   selectNextLeftArm(): void {
     this.builtCard.leftArmIndex = this.getNextIndex(
       parts.arms,
-      this.builtCard.leftArmIndex,
+      this.builtCard.leftArmIndex
     );
   }
 
   selectPrevLeftArm(): void {
     this.builtCard.leftArmIndex = this.getPrevIndex(
       parts.arms,
-      this.builtCard.leftArmIndex,
+      this.builtCard.leftArmIndex
     );
   }
 
   selectNextRightArm(): void {
     this.builtCard.rightArmIndex = this.getNextIndex(
       parts.arms,
-      this.builtCard.rightArmIndex,
+      this.builtCard.rightArmIndex
     );
   }
 
   selectPrevRightArm(): void {
     this.builtCard.rightArmIndex = this.getPrevIndex(
       parts.arms,
-      this.builtCard.rightArmIndex,
+      this.builtCard.rightArmIndex
     );
   }
 
   selectNextBase(): void {
     this.builtCard.baseIndex = this.getNextIndex(
       parts.bases,
-      this.builtCard.baseIndex,
+      this.builtCard.baseIndex
     );
   }
 
   selectPrevBase(): void {
     this.builtCard.baseIndex = this.getPrevIndex(
       parts.bases,
-      this.builtCard.baseIndex,
+      this.builtCard.baseIndex
     );
   }
 
   selectNextTorso(): void {
     this.builtCard.torsoIndex = this.getNextIndex(
       parts.torsos,
-      this.builtCard.torsoIndex,
+      this.builtCard.torsoIndex
     );
   }
 
   selectPrevTorso(): void {
     this.builtCard.torsoIndex = this.getPrevIndex(
       parts.torsos,
-      this.builtCard.torsoIndex,
+      this.builtCard.torsoIndex
     );
   }
 }
