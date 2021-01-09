@@ -9,7 +9,7 @@
         <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
       </div>
       <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
-      <div class="top part" :class="{ 'sale-border': buildSource.head.onSale }">
+      <div class="top part" :class="[saleBorderClass]">
         <img :src="buildSource.head.src" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
@@ -106,6 +106,9 @@ export default class CardBuilder extends Vue {
     return this.builtCard.getBuild();
   }
 
+  get saleBorderClass(): string {
+    return this.buildSource.head.onSale ? "sale-border" : "";
+  }
   // Computed end
   saveToGallery() {
     this.savedBuilds.push(this.builtCard);
