@@ -9,7 +9,7 @@
         <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
       </div>
       <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
-      <div class="top part" :class="[saleBorderClass]">
+      <div :class="[saleBorderClass, 'top', 'part']">
         <img :src="buildSource.head.src" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
