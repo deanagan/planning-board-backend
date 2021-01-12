@@ -56,7 +56,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import parts, { Part } from "@/data/data";
+import parts from "@/data/data";
+import { Part } from "../interfaces/common";
 import { PropType } from "vue";
 
 interface BuildSources {
