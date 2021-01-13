@@ -57,16 +57,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
-import { Part } from "../interfaces/common";
+import { Part, BuildSources } from "../interfaces/common";
 import { PropType } from "vue";
-
-interface BuildSources {
-  head: Part;
-  leftArm: Part;
-  rightArm: Part;
-  torso: Part;
-  base: Part;
-}
 
 class Built {
   constructor(
