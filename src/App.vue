@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 //import HomePage from "@/home/HomePage.vue";
-import CardBuilder from "@/build/CardBuilder.vue";
+import CardBuilder from "@/core/CardBuilder.vue";
 
 @Component({
   components: {

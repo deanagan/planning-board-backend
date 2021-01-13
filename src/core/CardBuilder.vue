@@ -59,6 +59,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
 import { Part, BuildSources } from "../interfaces/common";
 import { PropType } from "vue";
+//import { PartSelector } from "../core/PartSelector";
+
 
 class Built {
   constructor(
