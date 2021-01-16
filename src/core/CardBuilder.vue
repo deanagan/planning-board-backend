@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <PartSelector :part="builtCard.getBuild().head" />
     <button class="save-to-gallery" @click="saveToGallery()">
       Save to Gallery
     </button>
@@ -57,10 +58,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
-import { Part, BuildSources } from "../interfaces/common";
+import { Part, BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
-//import { PartSelector } from "../core/PartSelector";
-
+import PartSelector from "@/core/PartSelector.vue";
 
 class Built {
   constructor(
@@ -82,7 +82,11 @@ class Built {
   }
 }
 
-@Component
+@Component({
+  components: {
+    PartSelector
+  }
+})
 export default class CardBuilder extends Vue {
   @Prop({
     type: Object as PropType<Built>,
