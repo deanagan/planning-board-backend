@@ -7,9 +7,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { Part } from "@/interfaces/common";
 import { PropType } from "vue";
 
-@Component({
-  props: ["part"]
-})
+@Component
 export default class PartSelector extends Vue {
   @Prop({
     type: Object as PropType<Part>,
