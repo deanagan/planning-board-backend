@@ -1,14 +1,14 @@
 <template>
   <div class="content">
-    <PartSelector :part="builtCard.getBuild().head" />
     <button class="save-to-gallery" @click="saveToGallery()">
       Save to Gallery
     </button>
     <div class="top-row">
-      <div class="build-name">
+      <!-- <div class="build-name">
         {{ buildSource.head.title }}
         <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
-      </div>
+      </div> -->
+      <PartSelector :parts="builtCard.getBodyParts().heads" />
       <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
       <div :class="[saleBorderClass, 'top', 'part']">
         <img :src="buildSource.head.src" title="head" />
@@ -58,7 +58,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
-import { Part, BuildSources } from "@/interfaces/common";
+import { BodyParts, Part, BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
 import PartSelector from "@/core/PartSelector.vue";
 
@@ -78,6 +78,14 @@ class Built {
       rightArm: parts.arms[this.rightArmIndex],
       torso: parts.torsos[this.torsoIndex],
       base: parts.bases[this.baseIndex]
+    };
+  }
+  getBodyParts(): BodyParts {
+    return {
+      heads: parts.heads,
+      arms: parts.arms,
+      torsos: parts.torsos,
+      bases: parts.bases
     };
   }
 }
