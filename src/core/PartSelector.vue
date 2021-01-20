@@ -1,5 +1,7 @@
 <template>
-  <div>{{ part.description }}</div>
+  <div class="build-name">
+    <span v-show="currentPart.onSale" class="hot">Hot!</span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,12 +12,16 @@ import { PropType } from "vue";
 @Component
 export default class PartSelector extends Vue {
   @Prop({
-    type: Object as PropType<Array<Part>>,
+    type: Array as PropType<Array<Part>>,
     required: true,
     default: () => []
   })
   parts!: Array<Part>;
   selectedIndex = 0;
+
+  get currentPart(): Part {
+    return this.parts[this.selectedIndex];
+  }
 
   getNextPart(): number {
     if (this.parts.length - 1 > this.selectedIndex) {
