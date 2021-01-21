@@ -1,6 +1,8 @@
 <template>
-  <div class="build-name">
-    <span v-show="currentPart.onSale" class="hot">Hot!</span>
+  <div :class="[saleBorderClass, 'part']">
+    <img :src="currentPart.src" title="head" />
+    <button @click="getPreviousPart()" class="prev-selector">&#9668;</button>
+    <button @click="getNextPart()" class="next-selector">&#9658;</button>
   </div>
 </template>
 
@@ -23,6 +25,10 @@ export default class PartSelector extends Vue {
     return this.parts[this.selectedIndex];
   }
 
+  get saleBorderClass(): string {
+    return this.currentPart.onSale ? "sale-border" : "";
+  }
+
   getNextPart(): number {
     if (this.parts.length - 1 > this.selectedIndex) {
       this.selectedIndex += 1;
@@ -43,4 +49,40 @@ export default class PartSelector extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.part {
+  position: relative;
+  width: 165px;
+  height: 165px;
+  border: 3px solid #aaa;
+}
+
+.part img {
+  width: 165px;
+}
+
+.head {
+  border-bottom: none;
+}
+
+.prev-selector {
+  position: absolute;
+  z-index: 1;
+  top: -3px;
+  left: -28px;
+  width: 25px;
+  height: 171px;
+}
+.next-selector {
+  position: absolute;
+  z-index: 1;
+  top: -3px;
+  right: -28px;
+  width: 25px;
+  height: 171px;
+}
+
+.sale-border {
+  border: 3px solid red;
+}
+</style>
