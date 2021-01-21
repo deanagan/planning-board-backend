@@ -10,11 +10,11 @@
       </div> -->
       <PartSelector :parts="builtCard.getBodyParts().heads" />
       <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
-      <div :class="[saleBorderClass, 'top', 'part']">
+      <!-- <div :class="[saleBorderClass, 'part']">
         <img :src="buildSource.head.src" title="head" />
         <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
-      </div>
+      </div> -->
     </div>
     <div class="middle-row">
       <div class="left part">
