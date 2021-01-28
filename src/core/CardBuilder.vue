@@ -18,38 +18,42 @@
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="buildSource.leftArm.src" title="left arm" />
+        <!-- <img :src="buildSource.leftArm.src" title="left arm" />
         <button @click="selectPrevLeftArm()" class="prev-selector">
           &#9650;
         </button>
         <button @click="selectNextLeftArm()" class="next-selector">
           &#9660;
-        </button>
+        </button> -->
+        <PartSelector :parts="builtCard.getBodyParts().arms" />
       </div>
       <div class="center part">
-        <img :src="buildSource.torso.src" title="torso" />
+        <!-- <img :src="buildSource.torso.src" title="torso" />
         <button @click="selectPrevTorso()" class="prev-selector">
           &#9668;
         </button>
         <button @click="selectNextTorso()" class="next-selector">
           &#9658;
-        </button>
+        </button> -->
+        <PartSelector :parts="builtCard.getBodyParts().torsos" />
       </div>
       <div class="right part">
-        <img :src="buildSource.rightArm.src" title="right arm" />
+        <!-- <img :src="buildSource.rightArm.src" title="right arm" />
         <button @click="selectPrevRightArm()" class="prev-selector">
           &#9650;
         </button>
         <button @click="selectNextRightArm()" class="next-selector">
           &#9660;
-        </button>
+        </button> -->
+        <PartSelector :parts="builtCard.getBodyParts().arms" />
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="buildSource.base.src" title="legs" />
+        <!-- <img :src="buildSource.base.src" title="legs" />
         <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
-        <button @click="selectNextBase()" class="next-selector">&#9658;</button>
+        <button @click="selectNextBase()" class="next-selector">&#9658;</button> -->
+        <PartSelector :parts="builtCard.getBodyParts().bases" />
       </div>
     </div>
   </div>
