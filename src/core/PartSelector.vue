@@ -1,5 +1,5 @@
 <template>
-  <div :class="[saleBorderClass, 'part']">
+  <div :class="[saleBorderClass, 'part', position]">
     <img :src="currentPart.src" title="head" />
     <button @click="getPreviousPart()" class="prev-selector">&#9668;</button>
     <button @click="getNextPart()" class="next-selector">&#9658;</button>
@@ -19,6 +19,14 @@ export default class PartSelector extends Vue {
     default: () => []
   })
   parts!: Array<Part>;
+
+  @Prop({
+    type: Object as PropType<string>,
+    required: true,
+    default: () => ""
+  })
+  position!: string;
+
   selectedIndex = 0;
 
   get currentPart(): Part {
@@ -64,7 +72,26 @@ export default class PartSelector extends Vue {
 .head {
   border-bottom: none;
 }
+.left {
+  border-right: none;
+}
+.right {
+  border-left: none;
+}
+.left img {
+  transform: rotate(-90deg);
+}
+.right img {
+  transform: rotate(90deg);
+}
+.bottom {
+  border-top: none;
+}
 
+.center .prev-selector,
+.center .next-selector {
+  opacity: 0.8;
+}
 .prev-selector {
   position: absolute;
   z-index: 1;
@@ -80,6 +107,36 @@ export default class PartSelector extends Vue {
   right: -28px;
   width: 25px;
   height: 171px;
+}
+
+.left .prev-selector {
+  top: -28px;
+  left: -3px;
+  width: 144px;
+  height: 25px;
+}
+.left .next-selector {
+  top: auto;
+  bottom: -28px;
+  left: -3px;
+  width: 144px;
+  height: 25px;
+}
+.right .prev-selector {
+  top: -28px;
+  left: 24px;
+  width: 144px;
+  height: 25px;
+}
+.right .next-selector {
+  top: auto;
+  bottom: -28px;
+  left: 24px;
+  width: 144px;
+  height: 25px;
+}
+.right .next-selector {
+  right: -3px;
 }
 
 .sale-border {
