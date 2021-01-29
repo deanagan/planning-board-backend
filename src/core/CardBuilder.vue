@@ -4,57 +4,18 @@
       Save to Gallery
     </button>
     <div class="top-row">
-      <!-- <div class="build-name">
-        {{ buildSource.head.title }}
-        <span v-show="buildSource.head.onSale" class="hot">Hot!</span>
-      </div> -->
-      <PartSelector :parts="builtCard.getBodyParts().heads" />
-      <!-- <div class="top part" :style="[headBorderStyle]"> will use class styling instead -->
-      <!-- <div :class="[saleBorderClass, 'part']">
-        <img :src="buildSource.head.src" title="head" />
-        <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
-        <button @click="selectNextHead()" class="next-selector">&#9658;</button>
-      </div> -->
+      <PartSelector :parts="builtCard.getBodyParts().heads" position="head" />
     </div>
     <div class="middle-row">
-      <div class="left part">
-        <!-- <img :src="buildSource.leftArm.src" title="left arm" />
-        <button @click="selectPrevLeftArm()" class="prev-selector">
-          &#9650;
-        </button>
-        <button @click="selectNextLeftArm()" class="next-selector">
-          &#9660;
-        </button> -->
-        <PartSelector :parts="builtCard.getBodyParts().arms" />
-      </div>
-      <div class="center part">
-        <!-- <img :src="buildSource.torso.src" title="torso" />
-        <button @click="selectPrevTorso()" class="prev-selector">
-          &#9668;
-        </button>
-        <button @click="selectNextTorso()" class="next-selector">
-          &#9658;
-        </button> -->
-        <PartSelector :parts="builtCard.getBodyParts().torsos" />
-      </div>
-      <div class="right part">
-        <!-- <img :src="buildSource.rightArm.src" title="right arm" />
-        <button @click="selectPrevRightArm()" class="prev-selector">
-          &#9650;
-        </button>
-        <button @click="selectNextRightArm()" class="next-selector">
-          &#9660;
-        </button> -->
-        <PartSelector :parts="builtCard.getBodyParts().arms" />
-      </div>
+      <PartSelector :parts="builtCard.getBodyParts().arms" position="left" />
+      <PartSelector
+        :parts="builtCard.getBodyParts().torsos"
+        position="center"
+      />
+      <PartSelector :parts="builtCard.getBodyParts().arms" position="right" />
     </div>
     <div class="bottom-row">
-      <div class="bottom part">
-        <!-- <img :src="buildSource.base.src" title="legs" />
-        <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
-        <button @click="selectNextBase()" class="next-selector">&#9658;</button> -->
-        <PartSelector :parts="builtCard.getBodyParts().bases" />
-      </div>
+      <PartSelector :parts="builtCard.getBodyParts().bases" position="bottom" />
     </div>
   </div>
 </template>
@@ -238,73 +199,6 @@ export default class CardBuilder extends Vue {
   justify-content: space-around;
   border-top: none;
 }
-.head {
-  border-bottom: none;
-}
-.left {
-  border-right: none;
-}
-.right {
-  border-left: none;
-}
-.left img {
-  transform: rotate(-90deg);
-}
-.right img {
-  transform: rotate(90deg);
-}
-.bottom {
-  border-top: none;
-}
-.prev-selector {
-  position: absolute;
-  z-index: 1;
-  top: -3px;
-  left: -28px;
-  width: 25px;
-  height: 171px;
-}
-.next-selector {
-  position: absolute;
-  z-index: 1;
-  top: -3px;
-  right: -28px;
-  width: 25px;
-  height: 171px;
-}
-.center .prev-selector,
-.center .next-selector {
-  opacity: 0.8;
-}
-.left .prev-selector {
-  top: -28px;
-  left: -3px;
-  width: 144px;
-  height: 25px;
-}
-.left .next-selector {
-  top: auto;
-  bottom: -28px;
-  left: -3px;
-  width: 144px;
-  height: 25px;
-}
-.right .prev-selector {
-  top: -28px;
-  left: 24px;
-  width: 144px;
-  height: 25px;
-}
-.right .next-selector {
-  top: auto;
-  bottom: -28px;
-  left: 24px;
-  width: 144px;
-  height: 25px;
-}
-.right .next-selector {
-  right: -3px;
-}
 
 .build-name {
   position: absolute;
@@ -317,19 +211,11 @@ export default class CardBuilder extends Vue {
   position: relative;
 }
 
-.hot {
-  color: red;
-}
-
 .save-to-gallery {
   position: absolute;
   right: 30px;
   width: 220px;
   padding: 3px;
   font-size: 16px;
-}
-
-.sale-border {
-  border: 3px solid red;
 }
 </style>
