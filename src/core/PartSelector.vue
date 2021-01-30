@@ -23,7 +23,8 @@ export default class PartSelector extends Vue {
   @Prop({
     type: Object as PropType<string>,
     required: true,
-    default: () => ""
+    default: () => "",
+    validator: (value: string): boolean => value.length > 0
   })
   position!: string;
 
