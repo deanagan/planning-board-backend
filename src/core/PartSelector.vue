@@ -1,6 +1,6 @@
 <template>
   <div :class="[saleBorderClass, 'part', position]">
-    <img :src="currentPart.src" title="head" />
+    <img :src="currentPart.src" :title="position" />
     <button @click="getPreviousPart()" class="prev-selector">&#9668;</button>
     <button @click="getNextPart()" class="next-selector">&#9658;</button>
   </div>
@@ -24,7 +24,8 @@ export default class PartSelector extends Vue {
     type: Object as PropType<string>,
     required: true,
     default: () => "",
-    validator: (value: string): boolean => value.length > 0
+    validator: (value: string): boolean =>
+      ["top", "left", "right", "center", "bottom"].includes(value)
   })
   position!: string;
 
@@ -70,7 +71,7 @@ export default class PartSelector extends Vue {
   width: 165px;
 }
 
-.head {
+.top {
   border-bottom: none;
 }
 .left {

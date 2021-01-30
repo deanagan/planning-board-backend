@@ -4,7 +4,7 @@
       Save to Gallery
     </button>
     <div class="top-row">
-      <PartSelector :parts="builtCard.getBodyParts().heads" position="head" />
+      <PartSelector :parts="builtCard.getBodyParts().heads" position="top" />
     </div>
     <div class="middle-row">
       <PartSelector :parts="builtCard.getBodyParts().arms" position="left" />
