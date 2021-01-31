@@ -21,7 +21,7 @@ export default class PartSelector extends Vue {
   parts!: Array<Part>;
 
   @Prop({
-    type: Object as PropType<string>,
+    type: String,
     required: true,
     default: () => "",
     validator: (value: string): boolean =>
@@ -45,6 +45,7 @@ export default class PartSelector extends Vue {
     } else {
       this.selectedIndex = 0;
     }
+    this.$emit("partSelected", this.selectedIndex);
     return this.selectedIndex;
   }
 
@@ -54,6 +55,7 @@ export default class PartSelector extends Vue {
     } else {
       this.selectedIndex = this.parts.length - 1;
     }
+    this.$emit("partSelected", this.selectedIndex);
     return this.selectedIndex;
   }
 }
