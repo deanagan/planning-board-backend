@@ -4,18 +4,39 @@
       Save to Gallery
     </button>
     <div class="top-row">
-      <PartSelector :parts="builtCard.getBodyParts().heads" position="top" />
+      <PartSelector
+        :parts="builtCard.getBodyParts().heads"
+        position="top"
+        @partSelected="selectedIndex => (builtCard.headIndex = selectedIndex)"
+      />
     </div>
     <div class="middle-row">
-      <PartSelector :parts="builtCard.getBodyParts().arms" position="left" />
+      <PartSelector
+        :parts="builtCard.getBodyParts().arms"
+        position="left"
+        @partSelected="
+          selectedIndex => (builtCard.leftArmIndex = selectedIndex)
+        "
+      />
       <PartSelector
         :parts="builtCard.getBodyParts().torsos"
         position="center"
+        @partSelected="selectedIndex => (builtCard.torsoIndex = selectedIndex)"
       />
-      <PartSelector :parts="builtCard.getBodyParts().arms" position="right" />
+      <PartSelector
+        :parts="builtCard.getBodyParts().arms"
+        position="right"
+        @partSelected="
+          selectedIndex => (builtCard.rightArmIndex = selectedIndex)
+        "
+      />
     </div>
     <div class="bottom-row">
-      <PartSelector :parts="builtCard.getBodyParts().bases" position="bottom" />
+      <PartSelector
+        :parts="builtCard.getBodyParts().bases"
+        position="bottom"
+        @partSelected="selectedIndex => (builtCard.baseIndex = selectedIndex)"
+      />
     </div>
   </div>
 </template>
@@ -23,7 +44,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
-import { BodyParts, Part, BuildSources } from "@/interfaces/common";
+import { BodyParts, BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
 import PartSelector from "@/core/PartSelector.vue";
 
@@ -83,7 +104,18 @@ export default class CardBuilder extends Vue {
   }
   // Computed end
   saveToGallery() {
-    this.savedBuilds.push(this.builtCard);
+    // Cloning instance including methods
+    // Horrible syntax
+    // The why:
+    // 1. Object.create() creates a new object
+    // 2. Object.getPrototypeOf() gets the prototype chain of the builtCard instance and adds it to the newly created object
+    // 3. Object.assign() does copying of the instance variables into the new object
+    const temp = Object.assign(
+      Object.create(Object.getPrototypeOf(this.builtCard)),
+      this.builtCard
+    );
+
+    this.savedBuilds.push(temp);
   }
 }
 </script>
