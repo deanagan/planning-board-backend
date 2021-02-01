@@ -44,37 +44,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import parts from "@/data/data";
-import { BodyParts, BuildSources } from "@/interfaces/common";
+import { BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
 import PartSelector from "@/core/PartSelector.vue";
-
-class Built {
-  constructor(
-    public headIndex: number = 0,
-    public leftArmIndex: number = 0,
-    public rightArmIndex: number = 0,
-    public torsoIndex: number = 0,
-    public baseIndex: number = 0
-  ) {}
-
-  getBuild(): BuildSources {
-    return {
-      head: parts.heads[this.headIndex],
-      leftArm: parts.arms[this.leftArmIndex],
-      rightArm: parts.arms[this.rightArmIndex],
-      torso: parts.torsos[this.torsoIndex],
-      base: parts.bases[this.baseIndex]
-    };
-  }
-  getBodyParts(): BodyParts {
-    return {
-      heads: parts.heads,
-      arms: parts.arms,
-      torsos: parts.torsos,
-      bases: parts.bases
-    };
-  }
-}
+import Built from "@/common/built";
 
 @Component({
   components: {
@@ -84,7 +57,7 @@ class Built {
 export default class CardBuilder extends Vue {
   @Prop({
     type: Object as PropType<Built>,
-    default: () => new Built()
+    default: () => new Built(parts)
   })
   builtCard!: Built;
 
