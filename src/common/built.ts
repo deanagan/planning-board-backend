@@ -1,8 +1,8 @@
 import { BodyParts, BuildSources } from "@/interfaces/common";
+import parts from "@/data/data";
 
 export default class Built {
   constructor(
-    public parts: BodyParts,
     public headIndex: number = 0,
     public leftArmIndex: number = 0,
     public rightArmIndex: number = 0,
@@ -10,21 +10,34 @@ export default class Built {
     public baseIndex: number = 0
   ) {}
 
+  getName(): string {
+    return parts.heads[this.headIndex].title;
+  }
   getBuild(): BuildSources {
     return {
-      head: this.parts.heads[this.headIndex],
-      leftArm: this.parts.arms[this.leftArmIndex],
-      rightArm: this.parts.arms[this.rightArmIndex],
-      torso: this.parts.torsos[this.torsoIndex],
-      base: this.parts.bases[this.baseIndex]
+      head: parts.heads[this.headIndex],
+      leftArm: parts.arms[this.leftArmIndex],
+      rightArm: parts.arms[this.rightArmIndex],
+      torso: parts.torsos[this.torsoIndex],
+      base: parts.bases[this.baseIndex]
     };
   }
   getBodyParts(): BodyParts {
     return {
-      heads: this.parts.heads,
-      arms: this.parts.arms,
-      torsos: this.parts.torsos,
-      bases: this.parts.bases
+      heads: parts.heads,
+      arms: parts.arms,
+      torsos: parts.torsos,
+      bases: parts.bases
     };
+  }
+  getTotalCost(): number {
+    const build = this.getBuild();
+    return (
+      build.head.cost +
+      build.leftArm.cost +
+      build.rightArm.cost +
+      build.torso.cost +
+      build.base.cost
+    );
   }
 }
