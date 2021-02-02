@@ -31,6 +31,10 @@ export default class PartSelector extends Vue {
 
   selectedIndex = 0;
 
+  created() {
+    this.$emit("partSelected", this.selectedIndex);
+  }
+
   get currentPart(): Part {
     return this.parts[this.selectedIndex];
   }
