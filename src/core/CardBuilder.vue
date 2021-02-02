@@ -38,26 +38,43 @@
         @partSelected="selectedIndex => (builtCard.baseIndex = selectedIndex)"
       />
     </div>
+    <h1>Totals</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th class="cost">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(card, i) in savedBuilds" :key="i">
+          <td>{{ card.getName() }}</td>
+          <td class="cost">{{ card.getTotalCost() }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import parts from "@/data/data";
 import { BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
 import PartSelector from "@/core/PartSelector.vue";
 import Built from "@/common/built";
 
+import createdHookMixin from "@/core/created-hook-mixin";
+
 @Component({
   components: {
     PartSelector
-  }
+  },
+  mixins: [createdHookMixin]
 })
 export default class CardBuilder extends Vue {
   @Prop({
     type: Object as PropType<Built>,
-    default: () => new Built(parts)
+    default: () => new Built()
   })
   builtCard!: Built;
 
@@ -89,6 +106,12 @@ export default class CardBuilder extends Vue {
     );
 
     this.savedBuilds.push(temp);
+
+    const totalCost = this.savedBuilds
+      .map(e => e.getTotalCost())
+      .reduce((total, current) => total + current);
+
+    console.log(totalCost);
   }
 }
 </script>
