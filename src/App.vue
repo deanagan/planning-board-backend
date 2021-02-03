@@ -11,23 +11,14 @@
       </nav>
     </header>
     <main>
-      <!-- <home-page msg="Welcome to Your Vue.js + TypeScript App" /> -->
-      <card-builder />
+      <router-view />
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-//import HomePage from "@/home/HomePage.vue";
-import CardBuilder from "@/core/CardBuilder.vue";
+import { Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    //HomePage
-    CardBuilder
-  }
-})
 export default class App extends Vue {}
 </script>
 
