@@ -9,7 +9,7 @@
       />
     </div>
     <div class="get-started">
-      <router-link to="/build">Get started</router-link> building your greeting card!
+      <router-link to="/build">Get started</router-link> building your card!
     </div>
   </div>
 </template>
