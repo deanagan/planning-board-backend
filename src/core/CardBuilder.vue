@@ -57,63 +57,55 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { BuildSources } from "@/interfaces/common";
-import { PropType } from "vue";
+import { Vue } from "vue-property-decorator";
+import { BodyParts } from "@/interfaces/common";
 import PartSelector from "@/core/PartSelector.vue";
 import Built from "@/common/built";
 
 import createdHookMixin from "@/core/created-hook-mixin";
 
-@Component({
-  components: {
-    PartSelector
+export default Vue.extend({
+  name: "CardBuilder",
+  mixins: [createdHookMixin],
+  components: { PartSelector },
+  data: () => {
+    return {
+      builtCard: new Built(),
+      savedBuilds: [] as Built[]
+    };
   },
-  mixins: [createdHookMixin]
-})
-export default class CardBuilder extends Vue {
-  @Prop({
-    type: Object as PropType<Built>,
-    default: () => new Built()
-  })
-  builtCard!: Built;
 
-  @Prop({
-    type: Array as PropType<Array<Built>>,
-    default: () => []
-  })
-  savedBuilds!: Array<Built>;
+  computed: {
+    saleBorderClass(): string {
+      return this.builtCard.getBuild().head.onSale ? "sale-border" : "";
+    }
+  },
+  methods: {
+    saveToGallery() {
+      // Cloning instance including methods
+      // Horrible syntax
+      // The why:
+      // 1. Object.create() creates a new object
+      // 2. Object.getPrototypeOf() gets the prototype chain of the builtCard instance and adds it to the newly created object
+      // 3. Object.assign() does copying of the instance variables into the new object
+      const temp = Object.assign(
+        Object.create(Object.getPrototypeOf(this.builtCard)),
+        this.builtCard
+      );
 
-  // Computed Start
-  get buildSource(): BuildSources {
-    return this.builtCard.getBuild();
+      this.savedBuilds.push(temp);
+
+      const totalCost = this.savedBuilds
+        .map(e => e.getTotalCost())
+        .reduce((total, current) => total + current);
+
+      console.log(totalCost);
+    },
+    getBodyParts(): BodyParts {
+      return this.builtCard.getBodyParts();
+    }
   }
-
-  get saleBorderClass(): string {
-    return this.buildSource.head.onSale ? "sale-border" : "";
-  }
-  // Computed end
-  saveToGallery() {
-    // Cloning instance including methods
-    // Horrible syntax
-    // The why:
-    // 1. Object.create() creates a new object
-    // 2. Object.getPrototypeOf() gets the prototype chain of the builtCard instance and adds it to the newly created object
-    // 3. Object.assign() does copying of the instance variables into the new object
-    const temp = Object.assign(
-      Object.create(Object.getPrototypeOf(this.builtCard)),
-      this.builtCard
-    );
-
-    this.savedBuilds.push(temp);
-
-    const totalCost = this.savedBuilds
-      .map(e => e.getTotalCost())
-      .reduce((total, current) => total + current);
-
-    console.log(totalCost);
-  }
-}
+});
 </script>
 
 <style scoped>
