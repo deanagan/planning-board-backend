@@ -7,62 +7,66 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import { Part } from "@/interfaces/common";
 import { PropType } from "vue";
 
-@Component
-export default class PartSelector extends Vue {
-  @Prop({
-    type: Array as PropType<Array<Part>>,
-    required: true,
-    default: () => []
-  })
-  parts!: Array<Part>;
-
-  @Prop({
-    type: String,
-    required: true,
-    default: () => "",
-    validator: (value: string): boolean =>
-      ["top", "left", "right", "center", "bottom"].includes(value)
-  })
-  position!: string;
-
-  selectedIndex = 0;
+export default Vue.extend({
+  name: "PartSelector",
+  props: {
+    parts: {
+      type: Array as PropType<Array<Part>>,
+      required: true,
+      default: () => []
+    },
+    position: {
+      type: String,
+      required: true,
+      default: () => "top",
+      validator: (value: string): boolean =>
+        ["top", "left", "right", "center", "bottom"].includes(value)
+    }
+  },
+  data: () => {
+    return {
+      selectedIndex: 0
+    };
+  },
 
   created() {
     this.$emit("partSelected", this.selectedIndex);
-  }
+  },
 
-  get currentPart(): Part {
-    return this.parts[this.selectedIndex];
-  }
-
-  get saleBorderClass(): string {
-    return this.currentPart.onSale ? "sale-border" : "";
-  }
-
-  getNextPart(): number {
-    if (this.parts.length - 1 > this.selectedIndex) {
-      this.selectedIndex += 1;
-    } else {
-      this.selectedIndex = 0;
+  computed: {
+    currentPart(): Part {
+      return this.parts[this.selectedIndex];
+    },
+    saleBorderClass(): string {
+      return this.currentPart.onSale ? "sale-border" : "";
     }
-    this.$emit("partSelected", this.selectedIndex);
-    return this.selectedIndex;
-  }
+  },
+  methods: {
+    getNextPart(): number {
+      if (this.parts.length - 1 > this.selectedIndex) {
+        this.selectedIndex += 1;
+      } else {
+        this.selectedIndex = 0;
+      }
+      this.$emit("partSelected", this.selectedIndex);
+      return this.selectedIndex;
+    },
 
-  getPreviousPart(): number {
-    if (this.selectedIndex > 0) {
-      this.selectedIndex -= 1;
-    } else {
-      this.selectedIndex = this.parts.length - 1;
+    getPreviousPart(): number {
+      if (this.selectedIndex > 0) {
+        this.selectedIndex -= 1;
+      } else {
+        this.selectedIndex = this.parts.length - 1;
+      }
+      this.$emit("partSelected", this.selectedIndex);
+      return this.selectedIndex;
     }
-    this.$emit("partSelected", this.selectedIndex);
-    return this.selectedIndex;
   }
-}
+});
 </script>
 
 <style scoped>
