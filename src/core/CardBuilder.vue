@@ -1,8 +1,11 @@
 <template>
   <div class="content">
-    <button class="save-to-gallery" @click="saveToGallery()">
-      Save to Gallery
-    </button>
+    <div class="preview">
+      <CardPreview :selectedParts="builtCard.getBuild()" />
+      <button class="save-to-gallery" @click="saveToGallery()">
+        Save to Gallery
+      </button>
+    </div>
     <div class="top-row">
       <PartSelector
         :parts="builtCard.getBodyParts().heads"
@@ -61,13 +64,13 @@ import { Vue } from "vue-property-decorator";
 import { BodyParts } from "@/interfaces/common";
 import PartSelector from "@/core/PartSelector.vue";
 import Built from "@/common/built";
-
+import CardPreview from "@/core/CardPreview.vue";
 import createdHookMixin from "@/core/created-hook-mixin";
 
 export default Vue.extend({
   name: "CardBuilder",
   mixins: [createdHookMixin],
-  components: { PartSelector },
+  components: { PartSelector, CardPreview },
   data: () => {
     return {
       builtCard: new Built(),
@@ -109,6 +112,14 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.preview {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 210px;
+  height: 210px;
+  padding: 5px;
+}
 .part {
   position: relative;
   width: 165px;
@@ -145,8 +156,7 @@ export default Vue.extend({
 
 .save-to-gallery {
   position: absolute;
-  right: 30px;
-  width: 220px;
+  width: 210px;
   padding: 3px;
   font-size: 16px;
 }
