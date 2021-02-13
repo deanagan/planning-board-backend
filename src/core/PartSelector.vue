@@ -33,7 +33,7 @@ export default Vue.extend({
     };
   },
 
-  created() {
+  updated() {
     this.$emit("partSelected", this.selectedIndex);
   },
 
@@ -52,7 +52,7 @@ export default Vue.extend({
       } else {
         this.selectedIndex = 0;
       }
-      this.$emit("partSelected", this.selectedIndex);
+
       return this.selectedIndex;
     },
 
@@ -62,7 +62,7 @@ export default Vue.extend({
       } else {
         this.selectedIndex = this.parts.length - 1;
       }
-      this.$emit("partSelected", this.selectedIndex);
+
       return this.selectedIndex;
     }
   }
