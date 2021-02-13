@@ -1,7 +1,9 @@
 <template>
   <div class="content">
     <div class="preview">
-      <CardPreview :selectedParts="builtCard.getBuild()" />
+      <CollapsibleSection>
+        <CardPreview :selectedParts="builtCard.getBuild()" />
+      </CollapsibleSection>
       <button class="save-to-gallery" @click="saveToGallery()">
         Save to Gallery
       </button>
@@ -66,11 +68,12 @@ import PartSelector from "@/core/PartSelector.vue";
 import Built from "@/common/built";
 import CardPreview from "@/core/CardPreview.vue";
 import createdHookMixin from "@/core/created-hook-mixin";
+import CollapsibleSection from "@/common/CollapsibleSection.vue";
 
 export default Vue.extend({
   name: "CardBuilder",
   mixins: [createdHookMixin],
-  components: { PartSelector, CardPreview },
+  components: { PartSelector, CardPreview, CollapsibleSection },
   data: () => {
     return {
       builtCard: new Built(),
