@@ -43,21 +43,23 @@
         @partSelected="selectedIndex => (builtCard.baseIndex = selectedIndex)"
       />
     </div>
-    <h1>Totals</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Card</th>
-          <th class="cost">Cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(card, i) in savedBuilds" :key="i">
-          <td>{{ card.getName() }}</td>
-          <td class="cost">{{ card.getTotalCost() }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if="hasItemSavedInGallery()">
+      <h1>Totals</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Card</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(card, i) in savedBuilds" :key="i">
+            <td>{{ card.getName() }}</td>
+            <td class="cost">{{ card.getTotalCost() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -109,6 +111,9 @@ export default Vue.extend({
     },
     getBodyParts(): BodyParts {
       return this.builtCard.getBodyParts();
+    },
+    hasItemSavedInGallery(): boolean {
+      return this.savedBuilds?.length > 0 ?? false;
     }
   }
 });
