@@ -74,4 +74,8 @@ ul {
   text-decoration: None;
   color: inherit;
 }
+
+.router-link-active {
+  color: white;
+}
 </style>
