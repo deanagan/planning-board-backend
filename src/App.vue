@@ -4,8 +4,10 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <img class="logo" src="@/assets/build-card.png" alt="" />
-            Build a Card
+            <router-link class="nav-link" :to="{ name: 'Home' }">
+              <img class="logo" src="@/assets/build-card.png" alt="" />
+              Build a Card
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -60,5 +62,10 @@ ul {
 .logo {
   vertical-align: middle;
   height: 30px;
+}
+
+.nav-link {
+  text-decoration: None;
+  color: inherit;
 }
 </style>
