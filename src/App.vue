@@ -4,13 +4,13 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'Home' }">
+            <router-link class="nav-link" :to="{ name: 'Home' }" exact>
               <img class="logo" src="@/assets/build-card.png" alt="" />
               Card Builder
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'Build' }">
+            <router-link class="nav-link" :to="{ name: 'Build' }" exact>
               <img class="logo" alt="" />
               Build
             </router-link>
