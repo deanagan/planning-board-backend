@@ -6,7 +6,13 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Home' }">
               <img class="logo" src="@/assets/build-card.png" alt="" />
-              Build a Card
+              Card Builder
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Build' }">
+              <img class="logo" alt="" />
+              Build
             </router-link>
           </li>
         </ul>
