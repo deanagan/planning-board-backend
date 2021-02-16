@@ -2,6 +2,10 @@ import { BodyParts } from "../interfaces/common";
 
 const images = require.context("@/assets/parts", true, /\.png$/);
 
+export const propertyNames = ["top", "left", "right", "center", "bottom"];
+
+export const VALID_BODY_PARTS = ["heads", "arms", "torsos", "bases"];
+
 const parts: BodyParts = {
   heads: [
     {
