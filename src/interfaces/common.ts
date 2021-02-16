@@ -17,6 +17,7 @@ export interface BuildSources {
 }
 
 export interface BodyParts {
+  [key: string]: Part[];
   heads: Part[];
   arms: Part[];
   torsos: Part[];

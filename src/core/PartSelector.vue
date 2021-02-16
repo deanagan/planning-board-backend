@@ -1,15 +1,16 @@
 <template>
   <div :class="[saleBorderClass, 'part', position]">
-    <img :src="currentPart.src" :title="position" />
+    <img @click="showPartInfo()" :src="currentPart.src" :title="position" />
     <button @click="getPreviousPart()" class="prev-selector">&#9668;</button>
     <button @click="getNextPart()" class="next-selector">&#9658;</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import Vue from "vue";
 import { Part } from "@/interfaces/common";
 import { PropType } from "vue";
+import { propertyNames } from "@/data/data";
 
 export default Vue.extend({
   name: "PartSelector",
@@ -23,8 +24,7 @@ export default Vue.extend({
       type: String,
       required: true,
       default: () => "top",
-      validator: (value: string): boolean =>
-        ["top", "left", "right", "center", "bottom"].includes(value)
+      validator: (value: string): boolean => propertyNames.includes(value)
     }
   },
   data: () => {
@@ -64,6 +64,14 @@ export default Vue.extend({
       }
 
       return this.selectedIndex;
+    },
+
+    showPartInfo() {
+      const part = this.parts[this.selectedIndex];
+      this.$router.push({
+        name: "Parts",
+        params: { id: part.id.toFixed(), partType: part.type }
+      });
     }
   }
 });

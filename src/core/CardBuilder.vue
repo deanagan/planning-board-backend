@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import Vue from "vue";
 import { BodyParts } from "@/interfaces/common";
 import PartSelector from "@/core/PartSelector.vue";
 import Built from "@/common/built";
@@ -133,6 +133,7 @@ export default Vue.extend({
   width: 165px;
   height: 165px;
   border: 3px solid #aaa;
+  cursor: pointer;
 }
 .part img {
   width: 165px;
