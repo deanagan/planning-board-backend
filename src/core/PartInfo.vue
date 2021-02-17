@@ -17,7 +17,16 @@ interface PartInfo {
 }
 export default Vue.extend({
   name: "PartInfo",
-  props: ["partType", "id"],
+  props: {
+    partType: {
+      required: true,
+      default: ""
+    },
+    id: {
+      required: true,
+      default: -1
+    }
+  },
   computed: {
     part(): PartInfo {
       const { partType, id } = this;
