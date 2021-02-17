@@ -10,6 +10,7 @@
 <script lang="ts">
 import Vue from "vue";
 import parts from "@/data/data";
+import { validBodyParts } from "@/data/data";
 
 interface PartInfo {
   title: string;
@@ -19,12 +20,14 @@ export default Vue.extend({
   name: "PartInfo",
   props: {
     partType: {
+      type: String,
       required: true,
-      default: ""
+      validator: (value: string): boolean => validBodyParts.includes(value)
     },
     id: {
+      type: [String, Number],
       required: true,
-      default: -1
+      validator: (value: string | number): boolean => !Number.isNaN(value)
     }
   },
   computed: {
