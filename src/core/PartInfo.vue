@@ -17,9 +17,10 @@ interface PartInfo {
 }
 export default Vue.extend({
   name: "PartInfo",
+  props: ["partType", "id"],
   computed: {
     part(): PartInfo {
-      const { partType, id } = this.$route.params;
+      const { partType, id } = this;
       const part = parts[partType].find(part => part.id === +id);
 
       return {
