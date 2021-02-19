@@ -9,6 +9,8 @@ import CardHeads from "@/core/CardHeads.vue";
 import CardBases from "@/core/CardBases.vue";
 import CardTorsos from "@/core/CardTorsos.vue";
 import NotFound from "@/core/NotFound.vue";
+import SidebarDefault from "@/sidebars/SidebarDefault.vue";
+import SidebarBuild from "@/sidebars/SidebarBuild.vue";
 
 Vue.use(Router);
 
@@ -19,7 +21,10 @@ export default new Router({
     {
       path: "/",
       name: "Home",
-      component: HomePage
+      components: {
+        default: HomePage,
+        sidebar: SidebarDefault
+      }
     },
     {
       path: "*",
@@ -29,7 +34,10 @@ export default new Router({
     {
       path: "/build",
       name: "Build",
-      component: CardBuilder
+      components: {
+        default: CardBuilder,
+        sidebar: SidebarBuild
+      }
     },
     // This must come before part info below
     {
