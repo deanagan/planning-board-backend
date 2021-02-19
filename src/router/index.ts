@@ -71,7 +71,15 @@ export default new Router({
       path: "/parts/:partType/:id",
       name: "Parts",
       component: PartInfo,
-      props: true
+      props: true,
+      beforeEnter(to, _from, next) {
+        const isValidId = !Number.isNaN(+to.params.id);
+        if (isValidId) {
+          next();
+        } else {
+          next({ name: "Build" });
+        }
+      }
     }
   ]
 });
