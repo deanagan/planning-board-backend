@@ -8,15 +8,23 @@ import CardArms from "@/core/CardArms.vue";
 import CardHeads from "@/core/CardHeads.vue";
 import CardBases from "@/core/CardBases.vue";
 import CardTorsos from "@/core/CardTorsos.vue";
+import NotFound from "@/core/NotFound.vue";
 
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
       name: "Home",
       component: HomePage
+    },
+    {
+      path: "*",
+      name: "NotFound",
+      component: NotFound
     },
     {
       path: "/build",
