@@ -82,7 +82,16 @@ export default Vue.extend({
       savedBuilds: [] as Built[]
     };
   },
-
+  beforeRouteLeave(to, from, next) {
+    if (this.savedBuilds.length == 0) {
+      next();
+    } else {
+      const response = confirm("Are you sure you want to leave?");
+      if (response) {
+        next();
+      }
+    }
+  },
   computed: {
     saleBorderClass(): string {
       return this.builtCard.getBuild().head.onSale ? "sale-border" : "";
