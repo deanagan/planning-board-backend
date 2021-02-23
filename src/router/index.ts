@@ -1,13 +1,13 @@
 import Vue from "vue";
 import Router from "vue-router";
 import HomePage from "@/home/HomePage.vue";
-import CardBuilder from "@/core/CardBuilder.vue";
+import DroidBuilder from "@/core/DroidBuilder.vue";
 import PartInfo from "@/core/PartInfo.vue";
 import BrowseParts from "@/core/BrowseParts.vue";
-import CardArms from "@/core/CardArms.vue";
-import CardHeads from "@/core/CardHeads.vue";
-import CardBases from "@/core/CardBases.vue";
-import CardTorsos from "@/core/CardTorsos.vue";
+import DroidArms from "@/core/DroidArms.vue";
+import DroidHeads from "@/core/DroidHeads.vue";
+import DroidBases from "@/core/DroidBases.vue";
+import DroidTorsos from "@/core/DroidTorsos.vue";
 import NotFound from "@/core/NotFound.vue";
 import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
@@ -35,7 +35,7 @@ export default new Router({
       path: "/build",
       name: "Build",
       components: {
-        default: CardBuilder,
+        default: DroidBuilder,
         sidebar: SidebarBuild
       }
     },
@@ -48,22 +48,22 @@ export default new Router({
         {
           name: "BrowseHeads",
           path: "heads",
-          component: CardHeads
+          component: DroidHeads
         },
         {
           name: "BrowseArms",
           path: "arms",
-          component: CardArms
+          component: DroidArms
         },
         {
           name: "BrowseBases",
           path: "bases",
-          component: CardBases
+          component: DroidBases
         },
         {
           name: "BrowseTorsos",
           path: "torsos",
-          component: CardTorsos
+          component: DroidTorsos
         }
       ]
     },

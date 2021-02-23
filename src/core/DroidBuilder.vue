@@ -1,0 +1,181 @@
+<template>
+  <div class="content">
+    <div class="preview">
+      <CollapsibleSection>
+        <DroidPreview :selectedParts="builtDroid.getBuild()" />
+      </CollapsibleSection>
+      <button class="save-to-gallery" @click="saveToGallery()">
+        Save to Gallery
+      </button>
+    </div>
+    <div class="top-row">
+      <PartSelector
+        :parts="builtDroid.getBodyParts().heads"
+        position="top"
+        @partSelected="selectedIndex => (builtDroid.headIndex = selectedIndex)"
+      />
+    </div>
+    <div class="middle-row">
+      <PartSelector
+        :parts="builtDroid.getBodyParts().arms"
+        position="left"
+        @partSelected="
+          selectedIndex => (builtDroid.leftArmIndex = selectedIndex)
+        "
+      />
+      <PartSelector
+        :parts="builtDroid.getBodyParts().torsos"
+        position="center"
+        @partSelected="selectedIndex => (builtDroid.torsoIndex = selectedIndex)"
+      />
+      <PartSelector
+        :parts="builtDroid.getBodyParts().arms"
+        position="right"
+        @partSelected="
+          selectedIndex => (builtDroid.rightArmIndex = selectedIndex)
+        "
+      />
+    </div>
+    <div class="bottom-row">
+      <PartSelector
+        :parts="builtDroid.getBodyParts().bases"
+        position="bottom"
+        @partSelected="selectedIndex => (builtDroid.baseIndex = selectedIndex)"
+      />
+    </div>
+    <div v-if="hasItemSavedInGallery()">
+      <h1>Totals</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Droid</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(droid, i) in savedBuilds" :key="i">
+            <td>{{ droid.getName() }}</td>
+            <td class="cost">{{ droid.getTotalCost() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { BodyParts } from "@/interfaces/common";
+import PartSelector from "@/core/PartSelector.vue";
+import Built from "@/common/built";
+import DroidPreview from "@/core/DroidPreview.vue";
+import createdHookMixin from "@/core/created-hook-mixin";
+import CollapsibleSection from "@/common/CollapsibleSection.vue";
+
+export default Vue.extend({
+  name: "DroidBuilder",
+  mixins: [createdHookMixin],
+  components: { PartSelector, DroidPreview, CollapsibleSection },
+  data: () => {
+    return {
+      builtDroid: new Built(),
+      savedBuilds: [] as Built[]
+    };
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.savedBuilds.length == 0) {
+      next();
+    } else {
+      const response = confirm("Are you sure you want to leave?");
+      if (response) {
+        next();
+      }
+    }
+  },
+  computed: {
+    saleBorderClass(): string {
+      return this.builtDroid.getBuild().head.onSale ? "sale-border" : "";
+    }
+  },
+  methods: {
+    saveToGallery() {
+      // Cloning instance including methods
+      // Horrible syntax
+      // The why:
+      // 1. Object.create() creates a new object
+      // 2. Object.getPrototypeOf() gets the prototype chain of the builtDroid instance and adds it to the newly created object
+      // 3. Object.assign() does copying of the instance variables into the new object
+      const temp = Object.assign(
+        Object.create(Object.getPrototypeOf(this.builtDroid)),
+        this.builtDroid
+      );
+
+      this.savedBuilds.push(temp);
+
+      const totalCost = this.savedBuilds
+        .map(e => e.getTotalCost())
+        .reduce((total, current) => total + current);
+
+      console.log(totalCost);
+    },
+    getBodyParts(): BodyParts {
+      return this.builtDroid.getBodyParts();
+    },
+    hasItemSavedInGallery(): boolean {
+      return this.savedBuilds?.length > 0 ?? false;
+    }
+  }
+});
+</script>
+
+<style scoped>
+.preview {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 210px;
+  height: 210px;
+  padding: 5px;
+}
+.part {
+  position: relative;
+  width: 165px;
+  height: 165px;
+  border: 3px solid #aaa;
+  cursor: pointer;
+}
+.part img {
+  width: 165px;
+}
+.top-row {
+  display: flex;
+  justify-content: space-around;
+}
+.middle-row {
+  display: flex;
+  justify-content: center;
+}
+.bottom-row {
+  display: flex;
+  justify-content: space-around;
+  border-top: none;
+}
+
+.build-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+
+.content {
+  position: relative;
+}
+
+.save-to-gallery {
+  position: absolute;
+  width: 210px;
+  padding: 3px;
+  font-size: 16px;
+}
+</style>

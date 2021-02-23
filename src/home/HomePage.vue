@@ -3,13 +3,13 @@
     <div>
       <img
         class="character"
-        src="@/assets/yoda.png"
-        alt="yoda"
+        src="@/assets/droids.png"
+        alt="droids"
         aria-hidden="true"
       />
     </div>
     <div class="get-started">
-      <router-link to="/build">Get started</router-link> building your card!
+      <router-link to="/build">Get started</router-link> building your droid!
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Browse cards</h1>
+    <h1>Browse droid parts</h1>
     <ul class="menu">
       <li>
         <router-link :to="{ name: 'BrowseHeads' }">Heads</router-link>

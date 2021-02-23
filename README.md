@@ -1,4 +1,4 @@
-# card-builder
+# droid-builder
 
 ## Project setup
 ```

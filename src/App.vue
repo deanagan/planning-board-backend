@@ -5,8 +5,8 @@
         <ul>
           <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Home' }" exact>
-              <img class="logo" src="@/assets/build-card.png" alt="" />
-              Card Builder
+              <img class="logo" src="@/assets/build-droid.png" alt="" />
+              Droid Builder
             </router-link>
           </li>
           <li class="nav-item">
