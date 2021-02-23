@@ -1,4 +1,5 @@
 # droid-builder
+This project is purely educational and used for learning vue.js in typescript.
 
 ## Project setup
 ```
