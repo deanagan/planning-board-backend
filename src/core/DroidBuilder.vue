@@ -110,7 +110,8 @@ export default Vue.extend({
         this.builtDroid
       );
 
-      this.savedBuilds.push(temp);
+      this.$store.commit("addDroidToGallery", temp);
+      this.savedBuilds.push(temp); // TODO: Remove me now
 
       const totalCost = this.savedBuilds
         .map(e => e.getTotalCost())
