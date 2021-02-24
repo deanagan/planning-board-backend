@@ -11,6 +11,7 @@ import DroidTorsos from "@/core/DroidTorsos.vue";
 import NotFound from "@/core/NotFound.vue";
 import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
+import DroidGallery from "@/gallery/DroidGallery.vue";
 
 Vue.use(Router);
 
@@ -80,6 +81,11 @@ export default new Router({
           next({ name: "Build" });
         }
       }
+    },
+    {
+      path: "/gallery",
+      name: "DroidGallery",
+      component: DroidGallery
     }
   ]
 });
