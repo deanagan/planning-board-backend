@@ -15,6 +15,12 @@
               Build
             </router-link>
           </li>
+          <li class="nav-item gallery">
+            <router-link class="nav-link" to="/gallery" exact>
+              <img class="logo" alt="" />
+              Gallery
+            </router-link>
+          </li>
         </ul>
       </nav>
     </header>
@@ -67,6 +73,12 @@ ul {
   padding: 5px 10px;
   font-size: 22px;
   border-right: 1px solid #bbb;
+}
+
+.nav-item.cart {
+  position: relative;
+  margin-left: auto;
+  border-right: none;
 }
 
 .logo {
