@@ -104,7 +104,7 @@ ul {
 .aside {
   padding: 30px;
   background-color: #aaa;
-  width: 100px;
+  width: 150px;
   min-height: 300px;
 }
 </style>
