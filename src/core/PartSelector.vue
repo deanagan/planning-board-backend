@@ -110,15 +110,17 @@ export default Vue.extend({
 
 .center .prev-selector,
 .center .next-selector {
-  opacity: 0.8;
+  opacity: 0.5;
 }
+
 .prev-selector {
   position: absolute;
   z-index: 1;
   top: -3px;
   left: -28px;
   width: 25px;
-  height: 171px;
+  height: 165px;
+  border: 1px;
 }
 .next-selector {
   position: absolute;
@@ -126,13 +128,14 @@ export default Vue.extend({
   top: -3px;
   right: -28px;
   width: 25px;
-  height: 171px;
+  height: 165px;
+  border: 1px;
 }
 
 .left .prev-selector {
   top: -28px;
   left: -3px;
-  width: 144px;
+  width: 142px;
   height: 25px;
 }
 .left .next-selector {
@@ -144,15 +147,15 @@ export default Vue.extend({
 }
 .right .prev-selector {
   top: -28px;
-  left: 24px;
-  width: 144px;
+  left: 21px;
+  width: 142px;
   height: 25px;
 }
 .right .next-selector {
   top: auto;
   bottom: -28px;
-  left: 24px;
-  width: 144px;
+  left: 21px;
+  width: 142px;
   height: 25px;
 }
 .right .next-selector {
