@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import Vue from "vue";
 import { BuildSources } from "@/interfaces/common";
 import { PropType } from "vue";
 
