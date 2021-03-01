@@ -12,6 +12,7 @@ import NotFound from "@/core/NotFound.vue";
 import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
 import DroidGallery from "@/gallery/DroidGallery.vue";
+import LoginPage from "@/login/LoginPage.vue";
 
 Vue.use(Router);
 
@@ -39,6 +40,11 @@ export default new Router({
         default: DroidBuilder,
         sidebar: SidebarBuild
       }
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: LoginPage
     },
     // This must come before part info below
     {
@@ -89,3 +95,17 @@ export default new Router({
     }
   ]
 });
+
+
+// router.beforeEach((to, from, next) => {
+//   // redirect to login page if not logged in and trying to access a restricted page
+//   const publicPages = ['/login', '/register'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
+
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
+
+//   next();
+// })
