@@ -4,7 +4,6 @@ import { GalleryState } from "./types";
 
 export const mutations: MutationTree<GalleryState> = {
   addDroidToGallery(state, droid: Built) {
-    //state.gallery.push(droid);
     state.gallery?.builtDroids.push(droid);
   }
 };

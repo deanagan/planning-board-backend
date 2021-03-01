@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VeeValidate from "vee-validate";
 import App from "@/App.vue";
-import router from "@/router";
+import { router } from "@/router";
 import store from "@/store";
 
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";

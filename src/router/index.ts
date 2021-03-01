@@ -16,7 +16,7 @@ import LoginPage from "@/login/LoginPage.vue";
 
 Vue.use(Router);
 
-export default new Router({
+export const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -43,7 +43,7 @@ export default new Router({
     },
     {
       path: "/login",
-      name: "Login",
+      name: "LoginPage",
       component: LoginPage
     },
     // This must come before part info below
@@ -96,16 +96,15 @@ export default new Router({
   ]
 });
 
+router.beforeEach((to, _from, next) => {
+  const publicPages = ["/login", "/"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("token");
 
-// router.beforeEach((to, from, next) => {
-//   // redirect to login page if not logged in and trying to access a restricted page
-//   const publicPages = ['/login', '/register'];
-//   const authRequired = !publicPages.includes(to.path);
-//   const loggedIn = localStorage.getItem('user');
-
-//   if (authRequired && !loggedIn) {
-//     return next('/login');
-//   }
-
-//   next();
-// })
+  if (authRequired && !loggedIn) {
+    console.log(to.name);
+    next({ name: "LoginPage", query: { redirect: to.name } });
+  } else {
+    next();
+  }
+});

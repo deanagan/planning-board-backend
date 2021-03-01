@@ -79,7 +79,7 @@ import { ValidationProvider, ValidationObserver } from "vee-validate";
 import axios from "axios";
 
 export default Vue.extend({
-  name: "LoginPage",
+  name: "Login",
   components: {
     ValidationProvider,
     ValidationObserver
@@ -105,7 +105,8 @@ export default Vue.extend({
   // },
   created() {
     // reset login status
-    //this.logout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
   },
   methods: {
     //...mapActions("account", ["login", "logout"]),
@@ -136,8 +137,18 @@ export default Vue.extend({
           })
           .then(response => {
             const { data } = response;
-            console.log(data.jwt);
+            console.log(data);
             this.form.invalid = false;
+            const {
+              jwt,
+              user: { email }
+            } = data;
+            localStorage.setItem("token", jwt);
+            localStorage.setItem("email", email);
+
+            const redirect = this.$route.query.redirect?.toString() || "Home";
+
+            this.$router.replace({ name: redirect });
           })
           .catch(e => {
             console.log(e);

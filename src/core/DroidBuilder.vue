@@ -72,9 +72,8 @@ import DroidPreview from "@/core/DroidPreview.vue";
 import createdHookMixin from "@/core/created-hook-mixin";
 import CollapsibleSection from "@/common/CollapsibleSection.vue";
 //import { mapState, mapActions } from "vuex";
-import { createNamespacedHelpers } from "vuex";
 
-const { mapState, mapActions } = createNamespacedHelpers("gallery");
+import { mapGetters, mapMutations } from "vuex";
 
 export default Vue.extend({
   name: "DroidBuilder",
@@ -83,6 +82,7 @@ export default Vue.extend({
   data: () => {
     return {
       builtDroid: new Built()
+
       //  savedBuilds: [] as Built[]
     };
   },
@@ -100,10 +100,13 @@ export default Vue.extend({
     saleBorderClass(): string {
       return this.builtDroid.getBuild().head.onSale ? "sale-border" : "";
     },
-    ...mapState(["builtDroids"])
+    ...mapGetters({
+      builtDroids: "gallery/builtDroids"
+    })
   },
   methods: {
-    ...mapActions(["addDroidToGallery"]),
+    ...mapMutations({ addDroidToGallery: "gallery/addDroidToGallery" }),
+    //...mapActions(["addDroidToGallery"]),
     // addDroidToGallery() {
     //   return this.$store.getters.addDroidToGallery;
     // },
@@ -118,8 +121,10 @@ export default Vue.extend({
         Object.create(Object.getPrototypeOf(this.builtDroid)),
         this.builtDroid
       );
-
-      this.$store.commit("gallery/addDroidToGallery", temp);
+      console.log(this);
+      this.addDroidToGallery(temp);
+      //this.gallery.addDroidToGallery(temp);
+      //this.$store.commit("gallery/addDroidToGallery", temp);
       // this.savedBuilds.push(temp); // TODO: Remove me now
 
       // const totalCost = this.savedBuilds
@@ -138,9 +143,8 @@ export default Vue.extend({
     },
     getGalleryContent(): Built[] {
       console.log("getting content");
-      //console.log(this.$store.state.gallery.builtDroids);
 
-      return this.$store.getters["gallery/builtDroids"];
+      return this.builtDroids;
     }
   }
 });

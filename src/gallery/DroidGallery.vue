@@ -29,13 +29,14 @@
 <script lang="ts">
 import Built from "@/common/built";
 import Vue from "vue";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "DroidGallery",
   computed: {
+    ...mapGetters({ builtDroids: "gallery/builtDroids" }),
     gallery(): Built[] {
-      console.log(this.$store.state.gallery);
-      return this.$store.state.gallery;
+      return this.builtDroids;
     }
   }
 });

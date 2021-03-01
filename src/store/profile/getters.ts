@@ -3,10 +3,8 @@ import { ProfileState } from "./types";
 import { RootState } from "@/types";
 
 export const getters: GetterTree<ProfileState, RootState> = {
-  fullName(state): string {
+  loggedIn(state): boolean {
     const { user } = state;
-    const firstName = (user && user.firstName) || "";
-    const lastName = (user && user.lastName) || "";
-    return `${firstName} ${lastName}`;
+    return user?.isLoggedIn ?? false;
   }
 };
