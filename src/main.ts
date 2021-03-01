@@ -1,4 +1,5 @@
 import Vue from "vue";
+import VeeValidate from "vee-validate";
 import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
@@ -9,6 +10,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+Vue.use(VeeValidate);
 
 Vue.config.productionTip = false;
 

@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(droid, i) in savedBuilds" :key="i">
+          <tr v-for="(droid, i) in getGalleryContent()" :key="i">
             <td>{{ droid.getName() }}</td>
             <td class="cost">{{ droid.getTotalCost() }}</td>
           </tr>
@@ -71,6 +71,10 @@ import Built from "@/common/built";
 import DroidPreview from "@/core/DroidPreview.vue";
 import createdHookMixin from "@/core/created-hook-mixin";
 import CollapsibleSection from "@/common/CollapsibleSection.vue";
+//import { mapState, mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+
+const { mapState, mapActions } = createNamespacedHelpers("gallery");
 
 export default Vue.extend({
   name: "DroidBuilder",
@@ -78,26 +82,31 @@ export default Vue.extend({
   components: { PartSelector, DroidPreview, CollapsibleSection },
   data: () => {
     return {
-      builtDroid: new Built(),
-      savedBuilds: [] as Built[]
+      builtDroid: new Built()
+      //  savedBuilds: [] as Built[]
     };
   },
-  beforeRouteLeave(to, from, next) {
-    if (this.savedBuilds.length == 0) {
-      next();
-    } else {
-      const response = confirm("Are you sure you want to leave?");
-      if (response) {
-        next();
-      }
-    }
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   if (this.savedBuilds.length == 0) {
+  //     next();
+  //   } else {
+  //     const response = confirm("Are you sure you want to leave?");
+  //     if (response) {
+  //       next();
+  //     }
+  //   }
+  // },
   computed: {
     saleBorderClass(): string {
       return this.builtDroid.getBuild().head.onSale ? "sale-border" : "";
-    }
+    },
+    ...mapState(["builtDroids"])
   },
   methods: {
+    ...mapActions(["addDroidToGallery"]),
+    // addDroidToGallery() {
+    //   return this.$store.getters.addDroidToGallery;
+    // },
     saveToGallery() {
       // Cloning instance including methods
       // Horrible syntax
@@ -110,20 +119,28 @@ export default Vue.extend({
         this.builtDroid
       );
 
-      this.$store.commit("addDroidToGallery", temp);
-      this.savedBuilds.push(temp); // TODO: Remove me now
+      this.$store.commit("gallery/addDroidToGallery", temp);
+      // this.savedBuilds.push(temp); // TODO: Remove me now
 
-      const totalCost = this.savedBuilds
-        .map(e => e.getTotalCost())
-        .reduce((total, current) => total + current);
+      // const totalCost = this.savedBuilds
+      //   .map(e => e.getTotalCost())
+      //   .reduce((total, current) => total + current);
 
-      console.log(totalCost);
+      // console.log(totalCost);
+      console.log(this.getGalleryContent());
     },
     getBodyParts(): BodyParts {
       return this.builtDroid.getBodyParts();
     },
     hasItemSavedInGallery(): boolean {
-      return this.savedBuilds?.length > 0 ?? false;
+      //return this.savedBuilds?.length > 0 ?? false;
+      return this.getGalleryContent()?.length > 0 ?? false;
+    },
+    getGalleryContent(): Built[] {
+      console.log("getting content");
+      //console.log(this.$store.state.gallery.builtDroids);
+
+      return this.$store.getters["gallery/builtDroids"];
     }
   }
 });
@@ -140,6 +157,7 @@ export default Vue.extend({
 }
 .part {
   position: relative;
+  right: 20px;
   width: 165px;
   height: 165px;
   border: 3px solid #aaa;
@@ -175,7 +193,7 @@ export default Vue.extend({
 
 .save-to-gallery {
   position: absolute;
-  width: 210px;
+  width: 200px;
   padding: 3px;
   font-size: 16px;
 }
