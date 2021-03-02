@@ -2,14 +2,14 @@
   <div class="home">
     <div>
       <img
-        class="character"
-        src="@/assets/droids.png"
-        alt="droids"
+        class="fruits"
+        src="@/assets/fruits.png"
+        alt="fruits"
         aria-hidden="true"
       />
     </div>
     <div class="get-started">
-      <router-link to="/build">Get started</router-link> building your droid!
+      <router-link to="/build">Get started</router-link> planning your meals!
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default Vue.extend({
   text-align: center;
 }
 
-.character {
+.fruits {
   height: 300px;
 }
 </style>

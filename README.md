@@ -1,6 +1,7 @@
 # meal-planner
 This is a meal planner app
 PNGs used for this project were downloaded from https://www.freepngs.com/
+favicon from https://icon-icons.com/icon/avocado-food-fruit/98900
 
 ## Project setup
 ```
