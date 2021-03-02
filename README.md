@@ -1,6 +1,6 @@
-# droid-builder
-This project is purely educational and used for learning vue.js in typescript.
-PNGs used for this project were downloaded from https://www.freepngs.com/starwars-pngs
+# meal-planner
+This is a meal planner app
+PNGs used for this project were downloaded from https://www.freepngs.com/
 
 ## Project setup
 ```

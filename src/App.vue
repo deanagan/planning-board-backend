@@ -3,8 +3,8 @@
     <b-navbar toggleable="sm" type="dark" variant="primary">
       <b-navbar-brand href="#"
         ><router-link class="nav-link" :to="{ name: 'Home' }" exact>
-          <img class="logo" src="@/assets/build-droid.png" alt="" />
-          Droid Builder
+          <img class="logo" src="@/assets/meal-plan.png" alt="" />
+          Meal Planner
         </router-link></b-navbar-brand
       >
 
@@ -56,7 +56,7 @@
         <ul>
           <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Home' }" exact>
-              <img class="logo" src="@/assets/build-droid.png" alt="" />
+              <img class="logo" src="@/assets/meal-plan.png" alt="" />
               Droid Builder
             </router-link>
           </li>
