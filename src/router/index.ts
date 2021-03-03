@@ -34,8 +34,8 @@ export const router = new Router({
       component: NotFound
     },
     {
-      path: "/build",
-      name: "Build",
+      path: "/create",
+      name: "Create",
       components: {
         default: DroidBuilder,
         sidebar: SidebarBuild
@@ -96,15 +96,15 @@ export const router = new Router({
   ]
 });
 
-router.beforeEach((to, _from, next) => {
-  const publicPages = ["/login", "/"];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("token");
+// router.beforeEach((to, _from, next) => {
+//   const publicPages = ["/login", "/"];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem("token");
 
-  if (authRequired && !loggedIn) {
-    console.log(to.name);
-    next({ name: "LoginPage", query: { redirect: to.name } });
-  } else {
-    next();
-  }
-});
+//   if (authRequired && !loggedIn) {
+//     console.log(to.name);
+//     next({ name: "LoginPage", query: { redirect: to.name } });
+//   } else {
+//     next();
+//   }
+// });
