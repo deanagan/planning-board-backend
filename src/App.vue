@@ -12,9 +12,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">Link</b-nav-item>
-
-          <b-nav-item href="#" disabled>Disabled</b-nav-item>
+          <b-nav-item>
+            <router-link class="nav-link" :to="{ name: 'Create' }" exact>
+              Create
+            </router-link>
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -48,6 +50,14 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+
+
+
+    <b-container fluid>
+      <main>
+        <router-view />
+      </main>
+    </b-container>
   </div>
   <!--
   <div id="app">
@@ -98,7 +108,9 @@ import Vue from "vue";
 export default Vue.extend({});
 </script>
 
-<style>
+<style  scoped>
+
+
 body {
   background: linear-gradient(to bottom, #555, #999);
   background-attachment: fixed;
@@ -107,10 +119,17 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
+
+.container {
+
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
 main {
   padding: 30px;
   background-color: white;
-  /* width: 964px; */
+  width: 80%;
   min-height: 300px;
 }
 
@@ -126,11 +145,11 @@ ul {
 }
 
 .navbar-brand {
-  margin-left: 200px;
+  margin-left: 120px;
 }
 
 .navbar-nav > li:last-child {
-  margin-right: 100px;
+  margin-right: 120px;
 }
 /*
 .nav-item {
