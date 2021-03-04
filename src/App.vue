@@ -265,7 +265,7 @@
           ></canvas> -->
 
           <h2>Section title</h2>
-          <div class="table-responsive" style="height: 1020">
+          <!-- <div class="table-responsive" style="height: 1020">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
@@ -389,9 +389,25 @@
                   <td>information</td>
                   <td>text</td>
                 </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>random</td>
+                  <td>tabular</td>
+                  <td>information</td>
+                  <td>text</td>
+                </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>random</td>
+                  <td>tabular</td>
+                  <td>information</td>
+                  <td>text</td>
+                </tr>
+
               </tbody>
             </table>
-          </div>
+          </div> -->
+          <router-view />
         </main>
       </div>
     </b-container>
@@ -425,11 +441,8 @@ main {
 }
 
 .content {
-   display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+/* overflow: hidden;
+height: 100%; */
 }
 
 header {
