@@ -102,11 +102,16 @@
     </div>
   </div> -->
 
-    <b-navbar type="info" sticky class="bg-dark p-0">
+    <b-navbar
+      type="dark"
+      variant="primary"
+      class="flex-md-nowrap p-0 shadow"
+      sticky
+    >
       <!-- <div
       class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
     > -->
-      <b-navbar-brand href="#" class="col-md-3 col-lg-2 me-0 px-3"
+      <b-navbar-brand class="col-md-3 col-lg-2 me-0 px-3"
         ><router-link class="nav-link" :to="{ name: 'Home' }" exact>
           <img class="logo" src="@/assets/meal-plan.png" alt="" />
           Meal Planner
