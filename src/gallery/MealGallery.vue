@@ -2,14 +2,14 @@
   <div>
     <h1>Meal Gallery</h1>
     <div class="table-wrap">
-      <table class="table" >
+      <table class="table">
         <tbody>
           <tr>
-            <td>
+            <td class="bordered" style="width: 50%; text-align='center'">
               <table class="table">
                 <tbody>
                   <tr>
-                    <td style="align-contents: center;">
+                    <td  style="align-contents: center;">
                       <b-img
                         class="somepic"
                         :src="fruit1"
@@ -17,19 +17,22 @@
                       />
                     </td>
                   </tr>
-                  <td style="align-contents: center;">
+                  <td
+                    style="align-contents: center; border-top: 2px solid black;"
+                  >
                     <b-img :src="fruit2" style="height: 50%; width: 50%" />
                   </td>
                   <tr></tr>
                 </tbody>
               </table>
             </td>
-            <td>
+            <td class="bordered" style="width: 50%; text-align='center'">
               <b-card
                 title="Card title that wraps to a new line"
                 :img-src="fruit3"
                 img-alt="Image"
                 img-top
+                style="border: none;"
               />
             </td>
           </tr>
@@ -120,7 +123,7 @@ export default Vue.extend({
 
 <style scoped>
 .table-wrap {
-  height: 1040px;
+  height: 720px;
   overflow-y: auto;
 }
 
@@ -136,7 +139,17 @@ export default Vue.extend({
   top: 0;
 }
 
-table, th, td {
-  border: 3px solid black;
+.bordered {
+  border: 2px solid black;
+}
+
+.table td {
+  padding: 0px;
+}
+
+td img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
