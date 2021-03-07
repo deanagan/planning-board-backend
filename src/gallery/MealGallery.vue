@@ -1,155 +1,155 @@
 <template>
-  <div>
-    <h1>Meal Gallery</h1>
-    <div class="table-wrap">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td class="bordered" style="width: 50%; text-align='center'">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <td  style="align-contents: center;">
-                      <b-img
-                        class="somepic"
-                        :src="fruit1"
-                        style="height: 300px; width: 50%"
-                      />
-                    </td>
-                  </tr>
-                  <td
-                    style="align-contents: center; border-top: 2px solid black;"
-                  >
-                    <b-img :src="fruit2" style="height: 50%; width: 50%" />
-                  </td>
-                  <tr></tr>
-                </tbody>
-              </table>
-            </td>
-            <td class="bordered" style="width: 50%; text-align='center'">
-              <b-card
-                title="Card title that wraps to a new line"
-                :img-src="fruit3"
-                img-alt="Image"
-                img-top
-                style="border: none;"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="gallery">
+    <div class="reveal deck1">
+      <!-- <div class="slides" style="border: 4px solid black;"> -->
+      <div class="slides" style="z-index: 5">
+        <section>Vertical Slide 1</section>
+        <section>Vertical Slide 2</section>
+      </div>
     </div>
-    <!-- <b-container class="bv-example-row">
-      <b-row>
-        <b-col>
-<b-container class="bv-example-row">
-  <b-row>
-    <b-card
-            title="Card title that wraps to a new line"
-            img-src="https://placekitten.com/g/400/450"
-            img-alt="Image"
-            img-top
-        />
-  </b-row>
-  <b-row>
-    <b-card
-            title="Card title that wraps to a new line"
-            img-src="https://placekitten.com/g/400/450"
-            img-alt="Image"
-            img-top
-        />
-  </b-row>
-</b-container>
-
-
-        </b-col>
-        <b-col
-          ><b-card
-            title="Card title that wraps to a new line"
-            img-src="https://placekitten.com/g/400/450"
-            img-alt="Image"
-            img-top
-        /></b-col>
-      </b-row>
-    </b-container> -->
-
-    <!-- <table>
-      <thead>
-        <tr>
-          <th class="robot-title">
-            Droid
-          </th>
-          <th class="cost">
-            Cost
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(droid, index) in gallery" :key="index">
-          <td class="droid-title">
-            {{ droid.getBuild().head.title }}
-          </td>
-          <td class="cost">
-            {{ droid.getTotalCost() }}
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </template>
 
 <script lang="ts">
-//import Built from "@/common/built";
+// import Reveal from '@/../node_modules/reveal.js/js/reveal';
 import Vue from "vue";
-//import { mapGetters } from "vuex";
+import Reveal from "reveal.js/dist/reveal";
 
 export default Vue.extend({
-  name: "DroidGallery",
-  computed: {
-    //...mapGetters({ builtDroids: "gallery/builtDroids" }),
-    // gallery(): Built[] {
-    //   return this.builtDroids;
-    // }
-  },
   data: () => {
     return {
-      fruit1: require("@/assets/fruits.png"),
-      fruit2: require("@/assets/logo.png"),
-      fruit3: require("@/assets/meal-plan.png")
+      slides: {}
     };
+  },
+  components: {},
+  mounted() {
+    // if (window.location.search.match(/print-pdf/gi)) {
+    //   const link = document.createElement("link");
+    //   link.rel = "stylesheet";
+    //   link.type = "text/css";
+    //   link.href = "reveal.js/css/print/pdf.scss";
+    //   document.getElementsByTagName("head")[0].appendChild(link);
+    // }
+
+    // this.slides = new Reveal(document.querySelector(".deck1"), {
+    //   embedded: true,
+    //   keyboardCondition: "focused",
+    //   //hash: false, // we want this commented out so the url doesn't have hashes/ slide numbering
+
+    //   // Learn about plugins: https:/revealjs.com/plugins/
+    //   // plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+    //   dependencies: [],
+    //   width: 1280,
+    //   height: 720,
+    //   pdfSeparateFragments: false,
+    //   pdfMaxPagesPerSlide: 1,
+    //   center: true
+    // });
+
+    this.slides = new Reveal(document.querySelector(".deck1"), {
+      embedded: true,
+      keyboardCondition: "focused",
+      //hash: false, // we want this commented out so the url doesn't have hashes/ slide numbering
+
+      // Learn about plugins: https:/revealjs.com/plugins/
+      // plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+      dependencies: [],
+      width: 1280,
+      height: 720,
+
+      pdfSeparateFragments: false,
+      pdfMaxPagesPerSlide: 1,
+      center: true,
+      controlsLayout: "edges"
+    }).initialize();
+
+    // let revealSlide = document.querySelector(".reveal") as Reveal;
+    // revealSlide.style.width = "50vw";
+    // let reveadocument?.querySelector( '.reveal' ).style.width = '50vw';
+
+    //this.slides.initialize();
+    // window.Reveal = Reveal;
+    // this.slideinstance.initialize({
+    //   hash: true,
+
+    //   // Learn about plugins: https:/revealjs.com/plugins/
+    //   // plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+    //   dependencies: [],
+    //   width: 1280,
+    //   height: 720,
+    //   pdfSeparateFragments: false,
+    //   pdfMaxPagesPerSlide: 1,
+    //   embedded: false,
+    //   center: true
+    // });
   }
 });
 </script>
 
 <style scoped>
-.table-wrap {
-  height: 720px;
-  overflow-y: auto;
+@import url("../../node_modules/reveal.js/dist/reveal.css");
+@import url("../../node_modules/reveal.js/dist/theme/white.css");
+
+@import url("../../node_modules/bootstrap/dist/css/bootstrap.css");
+@import url("../../node_modules/bootstrap-vue/dist/bootstrap-vue.css");
+
+.gallery {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  /* margin-top: 60px; */
+  height: 100vh;
+
+  /* width: 100vw; */
+  /* width: 100%; */
+  margin-top: -20px;
+  margin-left: -160px;
+  border-left: 0px;
+  padding-bottom: 0px;
+  max-width: 1380px;
+  max-height: 860px;
 }
 
-.somepic {
-  position: relative;
-  z-index: 10;
+.reveal {
+  text-align: center;
+  /* height: 700px; */
+  /* position: relative; */
+  background-color: aqua;
 }
 
-.somepic .bottom {
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  top: 0;
+.reveal h6 {
+  text-transform: none;
 }
 
-.bordered {
-  border: 2px solid black;
+.reveal h5 {
+  text-transform: none;
 }
 
-.table td {
-  padding: 0px;
+.reveal p {
+  text-align: center;
 }
 
-td img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.reveal .print-pdf {
+  /* width: 100px; */
+  padding-left: 0px;
+  margin: 0px;
+}
+
+/* .reveal .section {
+  width: 100%;
+} */
+
+div .slide-background-content {
+  margin-left: 0px;
+  opacity: 0.1;
+}
+
+.card-body {
+
+  padding-left: 2px;
+  padding-right: 2px;
+
 }
 </style>

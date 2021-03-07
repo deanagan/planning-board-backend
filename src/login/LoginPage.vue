@@ -105,6 +105,7 @@ export default Vue.extend({
   // },
   created() {
     // reset login status
+    this.form.email = "";
     localStorage.removeItem("token");
     localStorage.removeItem("email");
   },
