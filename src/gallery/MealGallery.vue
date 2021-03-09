@@ -32,6 +32,7 @@
                   />
                 </div> -->
 
+          <input type="reset" value="Clear" @click="clearImage" />
           <div class="my-8">
             <image-uploader
               id="fileInput1"
@@ -101,7 +102,7 @@ export default Vue.extend({
       upload: require("@/assets/fruits.png"),
       msg: "Vue Image Upload and Resize Demo",
       hasImage: false,
-      image: null
+      image: {}
     };
   },
   components: {
@@ -122,7 +123,39 @@ export default Vue.extend({
     //     console.log("FileReader API not supported: use the <form>, Luke!");
     //   }
     // }
-    setImage: function(output: any) {
+    clearImage() {
+      console.log("clear image");
+      this.image = {};
+      this.hasImage = false;
+      //const imgprev = document.querySelector(".my-8")?.querySelector('.img-preview') as HTMLCollectionOf<HTMLElement>;
+
+      const elem = document.querySelector<HTMLElement>(".my-8 .img-preview");
+      if (elem) {
+        const style = elem?.style ?? undefined;
+        if (style !== undefined) {
+          style.display = "none";
+        }
+      }
+      // if (img) {
+      //   console.log(imgprev?.className);
+      // if (imgprev?.className) {
+      //   //this.$refs[imgprev?.className].style.display = "none";
+      // }
+      //  imgprev?.style.display = "none";
+      // elm?.style.display = "none";
+      // console.log(elm);
+      // }
+      //document.removeChild(img);
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setImage: function(output: object) {
+      const elem = document.querySelector<HTMLElement>(".my-8 .img-preview");
+      if (elem) {
+        const style = elem?.style ?? undefined;
+        if (style !== undefined) {
+          style.display = "unset";
+        }
+      }
       this.hasImage = true;
       this.image = output;
       console.log("hello");
