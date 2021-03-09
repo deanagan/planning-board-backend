@@ -2,8 +2,85 @@
   <div class="gallery">
     <div class="reveal deck1">
       <!-- <div class="slides" style="border: 4px solid black;"> -->
-      <div class="slides" style="z-index: 5">
-        <section>Vertical Slide 1</section>
+      <div class="slides">
+        <section>
+          Vertical Slide 1
+
+          <!-- Styled -->
+          <!-- <div class="row text-center" style="">
+              <div
+                class="col-xs-6 text-center"
+                style="background-color:none; margin-top:10px; position: fixed; border: 2px solid black;"
+              >
+                <div class="product-holder">
+                  <b-form-file
+                    v-model="file"
+                    ref="file-input"
+                    class="product-image"
+                    style="width:250px; height: 250px; opacity: 1; "
+                  >
+                  </b-form-file>
+
+                  <img
+                    :src="profile"
+                    width="50px"
+                    height="50px"
+                    class="plus-image"
+                    style=" margin-top: -20px;
+ margin-left: -15px;
+ transform: translate(-50%,-50%); position: absolute;"
+                  />
+                </div> -->
+
+          <div class="my-8">
+            <image-uploader
+              id="fileInput1"
+              :preview="true"
+              :className="['fileinput', { 'fileinput--loaded': hasImage }]"
+              capture="environment"
+              :debug="1"
+              doNotResize="gif"
+              :autoRotate="true"
+              outputFormat="verbose"
+              @input="setImage"
+            >
+              <label for="fileInput1" slot="upload-label">
+                <figure>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                  >
+                    <path
+                      class="path1"
+                      d="M9.5 19c0 3.59 2.91 6.5 6.5 6.5s6.5-2.91 6.5-6.5-2.91-6.5-6.5-6.5-6.5 2.91-6.5 6.5zM30 8h-7c-0.5-2-1-4-3-4h-8c-2 0-2.5 2-3 4h-7c-1.1 0-2 0.9-2 2v18c0 1.1 0.9 2 2 2h28c1.1 0 2-0.9 2-2v-18c0-1.1-0.9-2-2-2zM16 27.875c-4.902 0-8.875-3.973-8.875-8.875s3.973-8.875 8.875-8.875c4.902 0 8.875 3.973 8.875 8.875s-3.973 8.875-8.875 8.875zM30 14h-4v-2h4v2z"
+                    ></path>
+                  </svg>
+                </figure>
+                <span class="upload-caption">{{
+                  hasImage ? "Replace" : "Click to upload"
+                }}</span>
+              </label>
+            </image-uploader>
+          </div>
+
+          <!-- <div
+                  class="col-xs-6 text-center"
+                  style="background-color:none; margin-top:10px; position: fixed;"
+                >
+                  <b-img :src="upload" width="250" height="250" />
+                  <b-img
+                    :src="profile"
+                    width="50px"
+                    height="50px"
+                    style="position:absolute; margin-top: 50%;
+ margin-left: 50%;
+ transform: translate(-50%,-50%);"
+                  />
+
+                </div> -->
+        </section>
         <section>Vertical Slide 2</section>
       </div>
     </div>
@@ -14,14 +91,48 @@
 // import Reveal from '@/../node_modules/reveal.js/js/reveal';
 import Vue from "vue";
 import Reveal from "reveal.js/dist/reveal";
+// import PictureInput from "vue-picture-input/PictureInput.vue";
+import ImageUploader from "vue-image-upload-resize";
 
 export default Vue.extend({
   data: () => {
     return {
-      slides: {}
+      slides: {},
+      upload: require("@/assets/fruits.png"),
+      profile: require("@/assets/profile.png"),
+      msg: "Vue Image Upload and Resize Demo",
+      hasImage: false,
+      image: null
     };
   },
-  components: {},
+  components: {
+    ImageUploader
+  },
+  computed: {
+    // fileInput1() {
+    //   return "fileInput1";
+    // }
+  },
+  methods: {
+    // onChange(image: any) {
+    //   console.log("New picture selected!");
+    //   if (image) {
+    //     console.log("Picture loaded.");
+    //     //this.image = image;
+    //   } else {
+    //     console.log("FileReader API not supported: use the <form>, Luke!");
+    //   }
+    // }
+    setImage: function(output: any) {
+      this.hasImage = true;
+      this.image = output;
+      console.log("hello");
+      console.log(typeof output);
+      // console.log('Info', output.info)
+      // console.log('Exif', output.exif)
+    }
+  },
+
   mounted() {
     // if (window.location.search.match(/print-pdf/gi)) {
     //   const link = document.createElement("link");
@@ -93,6 +204,10 @@ export default Vue.extend({
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.css");
 @import url("../../node_modules/bootstrap-vue/dist/bootstrap-vue.css");
 
+>>> #fileInput1 {
+  display: none;
+}
+
 .gallery {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -147,9 +262,7 @@ div .slide-background-content {
 }
 
 .card-body {
-
   padding-left: 2px;
   padding-right: 2px;
-
 }
 </style>
