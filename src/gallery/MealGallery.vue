@@ -4,8 +4,6 @@
       <!-- <div class="slides" style="border: 4px solid black;"> -->
       <div class="slides">
         <section>
-          Vertical Slide 1
-
           <!-- Styled -->
           <!-- <div class="row text-center" style="">
               <div
@@ -33,7 +31,7 @@
                 </div> -->
 
           <input type="reset" value="Clear" @click="clearImage" />
-          <div class="my-8">
+          <b-card class="my-8">
             <image-uploader
               id="fileInput1"
               :preview="true"
@@ -46,25 +44,26 @@
               @input="setImage"
             >
               <label for="fileInput1" slot="upload-label">
-                <figure>
-                  <svg
+                <figure class="pictureHolder">
+                  <!-- <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
                     height="32"
                     viewBox="0 0 32 32"
-                  >
-                    <path
+                  > -->
+                  <!-- <path
                       class="path1"
                       d="M9.5 19c0 3.59 2.91 6.5 6.5 6.5s6.5-2.91 6.5-6.5-2.91-6.5-6.5-6.5-6.5 2.91-6.5 6.5zM30 8h-7c-0.5-2-1-4-3-4h-8c-2 0-2.5 2-3 4h-7c-1.1 0-2 0.9-2 2v18c0 1.1 0.9 2 2 2h28c1.1 0 2-0.9 2-2v-18c0-1.1-0.9-2-2-2zM16 27.875c-4.902 0-8.875-3.973-8.875-8.875s3.973-8.875 8.875-8.875c4.902 0 8.875 3.973 8.875 8.875s-3.973 8.875-8.875 8.875zM30 14h-4v-2h4v2z"
-                    ></path>
-                  </svg>
+                    ></path> -->
+                  <b-icon icon="plus" aria-hidden="true"></b-icon>
+                  <!-- </svg> -->
                 </figure>
-                <span class="upload-caption">{{
+                <!-- <span class="upload-caption">{{
                   hasImage ? "Replace" : "Click to upload"
-                }}</span>
+                }}</span> -->
               </label>
             </image-uploader>
-          </div>
+          </b-card>
 
           <!-- <div
                   class="col-xs-6 text-center"
@@ -128,12 +127,20 @@ export default Vue.extend({
       this.image = {};
       this.hasImage = false;
       //const imgprev = document.querySelector(".my-8")?.querySelector('.img-preview') as HTMLCollectionOf<HTMLElement>;
-
+      // TODO: use v-show
       const elem = document.querySelector<HTMLElement>(".my-8 .img-preview");
       if (elem) {
         const style = elem?.style ?? undefined;
         if (style !== undefined) {
           style.display = "none";
+        }
+      }
+
+      const ph = document.querySelector<HTMLElement>(".my-8 .pictureHolder");
+      if (ph) {
+        const style = ph.style ?? undefined;
+        if (style !== undefined) {
+          style.display = "unset";
         }
       }
       // if (img) {
@@ -160,6 +167,14 @@ export default Vue.extend({
       this.image = output;
       console.log("hello");
       console.log(typeof output);
+      // TODO: use v-show
+      const ph = document.querySelector<HTMLElement>(".my-8 .pictureHolder");
+      if (ph) {
+        const style = ph.style ?? undefined;
+        if (style !== undefined) {
+          style.display = "none";
+        }
+      }
       // console.log('Info', output.info)
       // console.log('Exif', output.exif)
     }
@@ -240,6 +255,17 @@ export default Vue.extend({
   display: none;
 }
 
+.my-8 {
+  border: 1px dashed black;
+  height: 300px;
+  widows: 300px;
+}
+
+.pictureHolder {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
 .gallery {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
