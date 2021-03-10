@@ -4,6 +4,11 @@
       <!-- <div class="slides" style="border: 4px solid black;"> -->
       <div class="slides">
         <section>
+
+          <div id="foo">
+            <image-preview-uploader v-model="imageData" />
+          </div>
+
           <!-- Styled -->
           <!-- <div class="row text-center" style="">
               <div
@@ -31,39 +36,43 @@
                 </div> -->
 
           <input type="reset" value="Clear" @click="clearImage" />
-          <b-card class="my-8">
-            <image-uploader
-              id="fileInput1"
-              :preview="true"
-              :className="['fileinput', { 'fileinput--loaded': hasImage }]"
-              capture="environment"
-              :debug="1"
-              doNotResize="gif"
-              :autoRotate="true"
-              outputFormat="verbose"
-              @input="setImage"
-            >
-              <label for="fileInput1" slot="upload-label">
-                <figure class="pictureHolder">
-                  <!-- <svg
+
+          <image-uploader
+            id="fileInput1"
+            :preview="true"
+            class="my9"
+            :className="['fileinput', { 'fileinput--loaded': hasImage }]"
+            capture="environment"
+            :debug="1"
+            doNotResize="gif"
+            :autoRotate="true"
+            outputFormat="verbose"
+            @input="setImage"
+          >
+            <label for="fileInput1" slot="upload-label">
+              <figure class="plusHolder">
+                <!-- <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
                     height="32"
                     viewBox="0 0 32 32"
                   > -->
-                  <!-- <path
+                <!-- <path
                       class="path1"
                       d="M9.5 19c0 3.59 2.91 6.5 6.5 6.5s6.5-2.91 6.5-6.5-2.91-6.5-6.5-6.5-6.5 2.91-6.5 6.5zM30 8h-7c-0.5-2-1-4-3-4h-8c-2 0-2.5 2-3 4h-7c-1.1 0-2 0.9-2 2v18c0 1.1 0.9 2 2 2h28c1.1 0 2-0.9 2-2v-18c0-1.1-0.9-2-2-2zM16 27.875c-4.902 0-8.875-3.973-8.875-8.875s3.973-8.875 8.875-8.875c4.902 0 8.875 3.973 8.875 8.875s-3.973 8.875-8.875 8.875zM30 14h-4v-2h4v2z"
                     ></path> -->
-                  <b-icon icon="plus" aria-hidden="true"></b-icon>
-                  <!-- </svg> -->
-                </figure>
-                <!-- <span class="upload-caption">{{
+                <b-icon
+                  v-show="!hasImage"
+                  icon="plus"
+                  aria-hidden="true"
+                ></b-icon>
+                <!-- </svg> -->
+              </figure>
+              <!-- <span class="upload-caption">{{
                   hasImage ? "Replace" : "Click to upload"
                 }}</span> -->
-              </label>
-            </image-uploader>
-          </b-card>
+            </label>
+          </image-uploader>
 
           <!-- <div
                   class="col-xs-6 text-center"
@@ -87,12 +96,14 @@
   </div>
 </template>
 
+
 <script lang="ts">
 // import Reveal from '@/../node_modules/reveal.js/js/reveal';
 import Vue from "vue";
 import Reveal from "reveal.js/dist/reveal";
 // import PictureInput from "vue-picture-input/PictureInput.vue";
 import ImageUploader from "vue-image-upload-resize";
+import ImagePreviewUploader from "@/common/ImagePreviewUploader.vue";
 
 export default Vue.extend({
   data: () => {
@@ -105,7 +116,8 @@ export default Vue.extend({
     };
   },
   components: {
-    ImageUploader
+    ImageUploader,
+    ImagePreviewUploader
   },
   computed: {
     // fileInput1() {
@@ -124,25 +136,11 @@ export default Vue.extend({
     // }
     clearImage() {
       console.log("clear image");
-      this.image = {};
+
       this.hasImage = false;
       //const imgprev = document.querySelector(".my-8")?.querySelector('.img-preview') as HTMLCollectionOf<HTMLElement>;
       // TODO: use v-show
-      const elem = document.querySelector<HTMLElement>(".my-8 .img-preview");
-      if (elem) {
-        const style = elem?.style ?? undefined;
-        if (style !== undefined) {
-          style.display = "none";
-        }
-      }
 
-      const ph = document.querySelector<HTMLElement>(".my-8 .pictureHolder");
-      if (ph) {
-        const style = ph.style ?? undefined;
-        if (style !== undefined) {
-          style.display = "unset";
-        }
-      }
       // if (img) {
       //   console.log(imgprev?.className);
       // if (imgprev?.className) {
@@ -156,25 +154,13 @@ export default Vue.extend({
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setImage: function(output: object) {
-      const elem = document.querySelector<HTMLElement>(".my-8 .img-preview");
-      if (elem) {
-        const style = elem?.style ?? undefined;
-        if (style !== undefined) {
-          style.display = "unset";
-        }
-      }
+
       this.hasImage = true;
       this.image = output;
       console.log("hello");
       console.log(typeof output);
       // TODO: use v-show
-      const ph = document.querySelector<HTMLElement>(".my-8 .pictureHolder");
-      if (ph) {
-        const style = ph.style ?? undefined;
-        if (style !== undefined) {
-          style.display = "none";
-        }
-      }
+
       // console.log('Info', output.info)
       // console.log('Exif', output.exif)
     }
@@ -255,17 +241,25 @@ export default Vue.extend({
   display: none;
 }
 
-.my-8 {
-  border: 1px dashed black;
-  height: 300px;
-  widows: 300px;
+.img-preview {
+  object-fit: stretch;
 }
 
-.pictureHolder {
+.my9 {
+  border: 1px dashed black;
+  width: 400px;
+  height: 400px;
+
+}
+
+.plusHolder {
   width: 50px;
   height: 50px;
   position: absolute;
+  left: -25;
+  top: -10;
 }
+
 .gallery {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
