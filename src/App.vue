@@ -41,7 +41,7 @@
     <div class="main">
       <!-- Main Content -->
       <div class="content">
-        <router-view/>
+        <router-view />
       </div>
     </div>
   </div>
@@ -50,21 +50,17 @@
 <script lang="ts">
 import Vue from "vue";
 
-export default Vue.extend({
-
-});
+export default Vue.extend({});
 </script>
 
 <style>
-
 .content {
-  width:100%;
-  padding-left:23%;
+  width: 1000px;
+  height: 720px;
+  margin-left: calc((100% - 1000px) / 2);
   text-align: center;
   margin-top: 10px;
-  overflow:hidden;
-  margin-right: 150px;
-
+  overflow: hidden;
 }
 
 body {
