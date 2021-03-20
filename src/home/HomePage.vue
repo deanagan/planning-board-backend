@@ -9,7 +9,7 @@
       />
     </div>
     <div class="get-started">
-      <router-link to="/build">Get started</router-link> planning your meals!
+      <router-link to="/create">Get started</router-link> planning your meals!
     </div>
   </div>
 </template>
