@@ -103,7 +103,6 @@ import Vue from "vue";
 import Reveal from "reveal.js/dist/reveal";
 // import PictureInput from "vue-picture-input/PictureInput.vue";
 import ImageUploader from "vue-image-upload-resize";
-import ImagePreviewUploader from "@/common/ImagePreviewUploader.vue";
 
 export default Vue.extend({
   data: () => {
@@ -116,8 +115,7 @@ export default Vue.extend({
     };
   },
   components: {
-    ImageUploader,
-    ImagePreviewUploader
+    ImageUploader
   },
   computed: {
     // fileInput1() {
