@@ -1,43 +1,6 @@
 <template>
   <div id="app">
-    <!-- Top Bar -->
-    <b-navbar
-      type="dark"
-      variant="primary"
-      class="flex-md-nowrap p-0 shadow nav-fill w-100"
-      sticky
-    >
-      <b-navbar-brand class="col-md-3 col-lg-2 me-0 px-3"
-        ><router-link class="nav-link" :to="{ name: 'Home' }" exact>
-          <img class="logo" src="@/assets/tasks.png" alt="" />
-          Planning Board
-        </router-link></b-navbar-brand
-      >
-
-      <button
-        class="navbar-toggler position-absolute d-md-none collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <input
-        class="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <b-navbar-nav class="px-3">
-        <router-link class="nav-link" :to="{ name: 'Login' }" exact>
-          <b-nav-item class="text-nowrap">Sign out</b-nav-item>
-        </router-link>
-      </b-navbar-nav>
-    </b-navbar>
-
+    <nav-bar />
     <div class="main">
       <!-- Main Content -->
       <div class="content">
@@ -49,8 +12,13 @@
 
 <script lang="ts">
 import Vue from "vue";
+import NavBar from "@/views/NavBar.vue";
 
-export default Vue.extend({});
+export default Vue.extend({
+  components: {
+    NavBar
+  }
+});
 </script>
 
 <style>
