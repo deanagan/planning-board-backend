@@ -1,19 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
-import HomePage from "@/home/HomePage.vue";
-import DroidBuilder from "@/core/DroidBuilder.vue";
+import HomePage from "@/views/HomePage.vue";
 import PartInfo from "@/core/PartInfo.vue";
 import BrowseParts from "@/core/BrowseParts.vue";
 import DroidArms from "@/core/DroidArms.vue";
 import DroidHeads from "@/core/DroidHeads.vue";
 import DroidBases from "@/core/DroidBases.vue";
 import DroidTorsos from "@/core/DroidTorsos.vue";
-import NotFound from "@/core/NotFound.vue";
+import NotFound from "@/views/NotFound.vue";
 import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import SidebarBuild from "@/sidebars/SidebarBuild.vue";
 import MealGallery from "@/gallery/MealGallery.vue";
 import LoginPage from "@/login/LoginPage.vue";
 import CreateMealPlan from "@/components/CreateMealPlan.vue";
+import PlanningBoard from "@/views/PlanningBoard.vue";
 
 Vue.use(Router);
 
@@ -27,6 +27,13 @@ export const router = new Router({
       components: {
         default: HomePage,
         sidebar: SidebarDefault
+      }
+    },
+    {
+      path: "/board",
+      name: "Board",
+      components: {
+        default: PlanningBoard
       }
     },
     {

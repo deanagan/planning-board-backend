@@ -9,8 +9,8 @@
     >
       <b-navbar-brand class="col-md-3 col-lg-2 me-0 px-3"
         ><router-link class="nav-link" :to="{ name: 'Home' }" exact>
-          <img class="logo" src="@/assets/meal-plan.png" alt="" />
-          Meal Planner
+          <img class="logo" src="@/assets/tasks.png" alt="" />
+          Planning Board
         </router-link></b-navbar-brand
       >
 
@@ -55,9 +55,9 @@ export default Vue.extend({});
 
 <style>
 .content {
-  width: 1000px;
-  height: 720px;
-  margin-left: calc((100% - 1000px) / 2);
+  /* width: 1000px; */
+  /* height: 720px; */
+  /* margin-left: calc((100% - 1000px) / 2); */
   text-align: center;
   margin-top: 10px;
   overflow: hidden;
@@ -69,6 +69,9 @@ body {
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
 }
 
 main {
