@@ -26,7 +26,6 @@ export default Vue.extend({
 <style scoped>
 .home {
   text-align: center;
-  margin-right: 25%;
 }
 
 .fruits {
