@@ -153,8 +153,8 @@ export default Vue.extend({
 <style scoped>
 .preview {
   position: absolute;
-  top: -20px;
-  right: 0;
+  top: 80px;
+  right: 800px;
   width: 210px;
   height: 210px;
   padding: 5px;
@@ -192,7 +192,12 @@ export default Vue.extend({
 }
 
 .content {
-  position: relative;
+  /* position: relative; */
+  text-align: center;
+  max-width: 1380px;
+  max-height: 860px;
+  margin-top: 20px;
+  margin-left: -300px;
 }
 
 .save-to-gallery {

@@ -13,7 +13,6 @@
           :useCustomSlot="true"
         >
           <div class="dz-message" data-dz-message>
-            <!-- We need set useCustomSlot=true for message below to take effect. -->
             <span>Drop breakfast image here to upload.</span>
           </div>
         </vue-drop-zone>
@@ -56,41 +55,7 @@
         <p>Dinner</p>
       </div>
       <div class="imageBox submit-form">
-        <form class="form-entry" @submit="onSubmitForm">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" v-model="name" placeholder="Name" required />
-          </div>
-          <div class="form-group">
-            <label for="dateAdded">Date Added:</label>
-            <input type="date" id="dateAdded" v-model="dateAdded" required />
-          </div>
-          <div class="form-group">
-            <label for="isfavorite">Is Favorite?:</label>
-            <input
-              type="checkbox"
-              id="isfavorite"
-              v-model="isfavorite"
-              value="true"
-            />
-          </div>
-          <div class="form-group">
-            <label for="serves">Total Serves:</label>
-            <input id="serves" type="number" v-model="serves" required />
-          </div>
-          <select v-model="selected">
-            <option
-              v-for="(option, id) in options"
-              :value="option.id"
-              :key="id"
-            >
-              {{ option.Type }}
-            </option>
-          </select>
-          <button class="btn btn-md btn-primary" type="submit">
-            Submit
-          </button>
-        </form>
+        <meal-plan-form />
       </div>
     </div>
   </div>
@@ -102,11 +67,7 @@ interface DropZoneUploadResponse {
   name: string;
 }
 
-interface MealType {
-  id: number | string;
-  Type: string;
-  Description: string;
-}
+
 
 interface FileStatus {
   status: string;
@@ -116,10 +77,15 @@ import Vue from "vue";
 import vue2Dropzone from "vue2-dropzone/dist/vue2Dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import axios from "axios";
+import MealPlanForm from "./MealPlanForm.vue";
+import { MealType } from "@/interfaces/meal-type";
 
 export default Vue.extend({
   name: "CharacterForm",
-  components: { vueDropZone: vue2Dropzone },
+  components: {
+    vueDropZone: vue2Dropzone,
+    MealPlanForm: MealPlanForm
+  },
   data: () => {
     return {
       name: "Enter Name",
@@ -190,23 +156,7 @@ export default Vue.extend({
       }
     };
   },
-  mounted() {
-    axios
-      .get("http://localhost:1337/meal-types", {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE0NTU4MjQyLCJleHAiOjE2MTcxNTAyNDJ9.tBj3jiL0FCy99fVsQDJUPYRKxt30rv1Ed_k_hpO1w-M"
-        }
-      })
-      .then(response => {
-        response.data.map((e: MealType) => {
-          this.options.push(e);
-        });
-      })
-      .catch((error: Error) => {
-        console.log(error);
-      });
-  },
+
   methods: {
     hasImageDropped(dropZone: InstanceType<typeof vue2Dropzone>) {
       return dropZone.getQueuedFiles().length > 0;
