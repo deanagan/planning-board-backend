@@ -52,7 +52,7 @@
 
         <b-col rows="4">
           <draggable
-            element="span"
+            tag="span"
             v-model="list2"
             v-bind="dragOptions"
             :move="onMove"
@@ -81,7 +81,7 @@
 
         <b-col rows="4">
           <draggable
-            element="span"
+            tag="span"
             v-model="list3"
             v-bind="dragOptions"
             :move="onMove"
