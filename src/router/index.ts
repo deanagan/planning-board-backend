@@ -9,10 +9,8 @@ import DroidBases from "@/core/DroidBases.vue";
 import DroidTorsos from "@/core/DroidTorsos.vue";
 import NotFound from "@/views/NotFound.vue";
 import SidebarDefault from "@/sidebars/SidebarDefault.vue";
-import SidebarBuild from "@/sidebars/SidebarBuild.vue";
 import MealGallery from "@/gallery/MealGallery.vue";
 import LoginPage from "@/login/LoginPage.vue";
-import CreateMealPlan from "@/components/CreateMealPlan.vue";
 import PlanningBoard from "@/views/PlanningBoard.vue";
 
 Vue.use(Router);
@@ -40,14 +38,6 @@ export const router = new Router({
       path: "*",
       name: "NotFound",
       component: NotFound
-    },
-    {
-      path: "/create",
-      name: "Create",
-      components: {
-        default: CreateMealPlan,
-        sidebar: SidebarBuild
-      }
     },
     {
       path: "/login",
