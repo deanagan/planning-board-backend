@@ -18,7 +18,7 @@
     </div>
     <b-container>
       <b-row>
-        <b-col rows="4">
+        <b-col rows="4" style="border: solid 1px black;">
           <draggable
             class="list-group"
             tag="ul"
@@ -50,7 +50,7 @@
           </draggable>
         </b-col>
 
-        <b-col rows="4">
+        <b-col rows="4" style="border: solid 1px black;">
           <draggable
             tag="span"
             v-model="list2"
@@ -79,7 +79,7 @@
           </draggable>
         </b-col>
 
-        <b-col rows="4">
+        <b-col rows="4" style="border: solid 1px black">
           <draggable
             tag="span"
             v-model="list3"
