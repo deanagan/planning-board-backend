@@ -12,6 +12,7 @@ import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import MealGallery from "@/gallery/MealGallery.vue";
 import LoginPage from "@/login/LoginPage.vue";
 import PlanningBoard from "@/views/PlanningBoard.vue";
+import DroidBuilder from "@/core/DroidBuilder.vue";
 
 Vue.use(Router);
 
@@ -32,6 +33,13 @@ export const router = new Router({
       name: "Board",
       components: {
         default: PlanningBoard
+      }
+    },
+    {
+      path: "/build",
+      name: "DroidBuilder",
+      components: {
+        default: DroidBuilder
       }
     },
     {

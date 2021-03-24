@@ -105,6 +105,7 @@ import Reveal from "reveal.js/dist/reveal";
 import ImageUploader from "vue-image-upload-resize";
 
 export default Vue.extend({
+  name: "MealGallery",
   data: () => {
     return {
       slides: {},
