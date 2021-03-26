@@ -2,7 +2,7 @@
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand
-        ><router-link class="nav-link" :to="{ name: 'Board' }" exact>
+        ><router-link class="nav-link brand" :to="{ name: 'Board' }" exact>
           <img class="logo" src="@/assets/tasks.png" alt="" />
           Planning Board
         </router-link></b-navbar-brand
@@ -12,9 +12,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">
-            <router-link :to="{ path: 'build' }" exact>Create</router-link>
-          </b-nav-item>
+          <b-nav-item>
+            <router-link :to="{ name: 'DroidBuilder' }" exact
+              >Create</router-link
+            ></b-nav-item
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -34,12 +36,13 @@
             <template #button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#" disabled>Profile</b-dropdown-item>
-            <b-dropdown-item>
-              <router-link class="nav-link" :to="{ name: 'Login' }" exact>
+            <b-dropdown-item href="#">Profile</b-dropdown-item>
+
+            <router-link class="nav-link" :to="{ name: 'Login' }" exact>
+              <b-dropdown-item>
                 Log out
-              </router-link>
-            </b-dropdown-item>
+              </b-dropdown-item>
+            </router-link>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -53,3 +56,9 @@ export default Vue.extend({
   name: "NavBar"
 });
 </script>
+
+<style scoped>
+.brand {
+  color: rgb(166, 166, 177);
+}
+</style>
