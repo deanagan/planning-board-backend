@@ -32,7 +32,7 @@ export default Vue.extend({
 }
 
 body {
-  /* background: linear-gradient(to bottom, #555, #999); */
+  background: linear-gradient(to bottom, #555, #999);
   background-attachment: fixed;
 }
 #app {
