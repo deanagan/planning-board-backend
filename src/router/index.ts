@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import HomePage from "@/views/HomePage.vue";
+// import HomePage from "@/views/HomePage.vue";
 import PartInfo from "@/core/PartInfo.vue";
 import BrowseParts from "@/core/BrowseParts.vue";
 import DroidArms from "@/core/DroidArms.vue";
@@ -20,16 +20,16 @@ export const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    // {
+    //   path: "/",
+    //   name: "Home",
+    //   components: {
+    //     default: HomePage,
+    //     sidebar: SidebarDefault
+    //   }
+    // },
     {
       path: "/",
-      name: "Home",
-      components: {
-        default: HomePage,
-        sidebar: SidebarDefault
-      }
-    },
-    {
-      path: "/board",
       name: "Board",
       components: {
         default: PlanningBoard
