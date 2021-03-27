@@ -92,15 +92,23 @@
                 v-for="element in list3"
                 :key="element.order"
               >
-                <i
+                <b-icon
+                  :icon="element.fixed ? 'lock-fill' : 'unlock-fill'"
+
+                  variant="dark"
+                  @click="element.fixed = !element.fixed"
+                  aria-hidden="true"
+                  scale="2"
+                ></b-icon>
+                <!-- <b-icon
                   :class="
                     element.fixed
                       ? 'fa fa-anchor'
-                      : 'glyphicon glyphicon-pushpin'
+                      : 'b-icon-sticky'
                   "
                   @click="element.fixed = !element.fixed"
                   aria-hidden="true"
-                ></i>
+                ></b-icon> -->
                 {{ element.name }}
                 <span class="badge">{{ element.order }}</span>
               </li>
@@ -143,7 +151,11 @@ export default {
   data() {
     return {
       list: message.map((name, index) => {
-        return { name, order: index + 1, fixed: false };
+        return {
+          name,
+          order: index + 1,
+          fixed: false
+        };
       }),
       list2: message2.map((name, index) => {
         return { name, order: index + 1, fixed: false };
