@@ -109,12 +109,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <div class="list-group col-md-3">
-      <pre>{{ listString }}</pre>
-    </div>
-    <div class="list-group col-md-3">
-      <pre>{{ list2String }}</pre>
-    </div>
+
   </div>
 </template>
 
@@ -150,7 +145,7 @@ export default {
       list: message.map((name, index) => {
         return { name, order: index + 1, fixed: false };
       }),
-      list2: message.map((name, index) => {
+      list2: message2.map((name, index) => {
         return { name, order: index + 1, fixed: false };
       }),
       list3: [],
