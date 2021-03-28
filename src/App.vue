@@ -28,7 +28,7 @@ export default Vue.extend({
   /* margin-left: calc((100% - 1000px) / 2); */
   text-align: center;
   margin-top: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 body {
