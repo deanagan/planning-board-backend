@@ -94,7 +94,6 @@
               >
                 <b-icon
                   :icon="element.fixed ? 'lock-fill' : 'unlock-fill'"
-
                   variant="dark"
                   @click="element.fixed = !element.fixed"
                   aria-hidden="true"
@@ -116,8 +115,13 @@
           </draggable>
         </b-col>
       </b-row>
-    </b-container>
 
+      <b-icon-plus-circle
+        @click="onClickAddNewTask"
+        class="add-button"
+        scale="2.0"
+      />
+    </b-container>
   </div>
 </template>
 
@@ -150,6 +154,7 @@ export default {
   },
   data() {
     return {
+      taskCards: [],
       list: message.map((name, index) => {
         return {
           name,
@@ -167,6 +172,9 @@ export default {
     };
   },
   methods: {
+    onClickAddNewTask() {
+      console.log("New task added!");
+    },
     orderList() {
       this.list = this.list.sort((one, two) => {
         return one.order - two.order;
@@ -211,6 +219,13 @@ export default {
 </script>
 
 <style scoped>
+.add-button {
+  float: right;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background: none;
+}
+
 .flip-list-move {
   transition: transform 0.5s;
 }
