@@ -113,9 +113,9 @@ export default Vue.extend({
   },
   data: () => {
     return {
-      fruit1: require("@/assets/fruits.png"),
+      fruit1: require("@/assets/logo.png"),
       fruit2: require("@/assets/logo.png"),
-      fruit3: require("@/assets/meal-plan.png")
+      fruit3: require("@/assets/logo.png")
     };
   }
 });
