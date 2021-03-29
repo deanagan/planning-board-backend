@@ -4,7 +4,6 @@
       <!-- <div class="slides" style="border: 4px solid black;"> -->
       <div class="slides">
         <section>
-
           <div id="foo">
             <image-preview-uploader v-model="imageData" />
           </div>
@@ -96,7 +95,6 @@
   </div>
 </template>
 
-
 <script lang="ts">
 // import Reveal from '@/../node_modules/reveal.js/js/reveal';
 import Vue from "vue";
@@ -134,8 +132,6 @@ export default Vue.extend({
     //   }
     // }
     clearImage() {
-      console.log("clear image");
-
       this.hasImage = false;
       //const imgprev = document.querySelector(".my-8")?.querySelector('.img-preview') as HTMLCollectionOf<HTMLElement>;
       // TODO: use v-show
@@ -153,7 +149,6 @@ export default Vue.extend({
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setImage: function(output: object) {
-
       this.hasImage = true;
       this.image = output;
       console.log("hello");
@@ -248,7 +243,6 @@ export default Vue.extend({
   border: 1px dashed black;
   width: 400px;
   height: 400px;
-
 }
 
 .plusHolder {
