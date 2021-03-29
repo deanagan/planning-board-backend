@@ -109,7 +109,7 @@ export default Vue.extend({
   data: () => {
     return {
       slides: {},
-      upload: require("@/assets/fruits.png"),
+      upload: require("@/assets/tasks.png"),
       msg: "Vue Image Upload and Resize Demo",
       hasImage: false,
       image: {}
