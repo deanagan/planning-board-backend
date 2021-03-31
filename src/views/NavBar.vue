@@ -38,11 +38,9 @@
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
 
-            <router-link class="nav-link" :to="{ name: 'Login' }" exact>
-              <b-dropdown-item>
-                Log out
-              </b-dropdown-item>
-            </router-link>
+            <b-dropdown-item :to="{ name: 'LoginPage' }" exact>
+              Log out
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
