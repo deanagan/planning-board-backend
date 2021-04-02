@@ -12,3 +12,10 @@ docker ps -a
 
 # Docker remove container
 docker rm [CONTAINER ID]
+
+# Docker commit
+docker commit -m "Add comment here" -a "[full name]" planningboard [docker hub username]/planningboard:latest
+
+# Docker login and push committed image
+docker login
+docker push [docker hub username]/planningboard:latest
