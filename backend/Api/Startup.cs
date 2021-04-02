@@ -14,6 +14,9 @@ using Microsoft.OpenApi.Models;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+using Api.Services;
+using Api.Interfaces;
+
 namespace PlanningBoard
 {
     public class Startup
@@ -38,6 +41,8 @@ namespace PlanningBoard
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
+
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

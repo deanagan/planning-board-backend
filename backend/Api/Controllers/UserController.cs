@@ -10,7 +10,7 @@ using Api.Data.Models;
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("v1/planningboard/api")]
+    [Route("v1/api")]
     public class UserController : ControllerBase
     {
         private IUserService _userService;
