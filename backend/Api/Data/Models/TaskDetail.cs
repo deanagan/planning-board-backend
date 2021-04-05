@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 
 namespace Api.Data.Models
 {
-    public class Role
+    public class TaskDetail
     {
         public int Id { get; set; }
 
@@ -10,5 +9,8 @@ namespace Api.Data.Models
 
         public string Description { get; set; }
 
+        public bool isDone { get; set; }
+
+        public Task Task { get; set; }
     }
 }

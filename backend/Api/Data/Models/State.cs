@@ -1,14 +1,12 @@
-using System.Collections.Generic;
 
 namespace Api.Data.Models
 {
-    public class Role
+    public class State
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
-
     }
 }
