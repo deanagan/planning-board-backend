@@ -4,10 +4,8 @@ namespace Api.Interfaces
 {
     public interface IUnitOfWork
     {
-        // IDataRepository<CheckList> CheckLists { get; }
         IDataRepository<User> Users { get; }
-        // IDataRepository<ItemDetail> ItemDetails { get; }
-        // IDataRepository<CheckListToItemDetail> CheckListToItemDetails { get; }
+        IDataRepository<Role> Roles { get; }
         void Save();
     }
 }

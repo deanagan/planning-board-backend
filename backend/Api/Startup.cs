@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+
+using Api.Data.Contexts;
+using Api.Data.Access;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -33,6 +37,9 @@ namespace PlanningBoard
         {
 
             services.AddControllers();
+            ConfigureDBContext(services);
+            services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlanningBoard", Version = "v1" });
@@ -43,6 +50,12 @@ namespace PlanningBoard
                 .AddCookie();
 
             services.AddScoped<IUserService, UserService>();
+        }
+
+        public virtual void ConfigureDBContext(IServiceCollection services)
+        {
+            var connection = Configuration["ConnectionStrings:DefaultConnection"];
+	        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
