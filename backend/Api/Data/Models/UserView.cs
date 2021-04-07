@@ -4,6 +4,8 @@ namespace Api.Data.Models
 {
     public class UserView
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public Role Role { get; set;}
