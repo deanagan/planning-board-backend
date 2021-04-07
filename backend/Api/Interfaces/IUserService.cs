@@ -6,8 +6,8 @@ namespace Api.Interfaces
 {
     public interface IUserService
     {
-        IEnumerable<User> GetUsers();
-        User GetUser(int id);
+        IEnumerable<UserView> GetUsers();
+        UserView GetUser(int id);
     }
 
 }
