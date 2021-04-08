@@ -27,7 +27,13 @@ namespace Api.Controllers
         {
             try
             {
-                return Ok(_userService.GetUsers());
+                var result = _userService.GetUsers();
+                if (result == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(result);
             }
             catch(Exception ex)
             {
@@ -44,7 +50,7 @@ namespace Api.Controllers
                 var result = _userService.GetUser(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return NoContent();
                 }
                 return Ok(result);
             }
