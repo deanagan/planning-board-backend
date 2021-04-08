@@ -33,13 +33,13 @@ namespace Api.Services
         {
             var user = _unitOfWork.Users.Get(id);
 
-            return new UserView {
+            return user != null ? new UserView {
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
                 Hash = user.Hash,
                 Role = _unitOfWork.Roles.Get(user.RoleId)
-            };
+            } : null;
         }
 
 
