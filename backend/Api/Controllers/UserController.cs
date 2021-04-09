@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -61,24 +62,24 @@ namespace Api.Controllers
         }
 
         // // TODO: async-await eventually
-        // [HttpPost("[action]")]
-        // public IActionResult Users(User user)
-        // {
-        //     if (user != null)
-        //     {
-        //         try
-        //         {
-        //             _userService.CreateUser(user);
-        //             return CreatedAtAction(nameof(user), new { id = 1 }, user);
-        //         }
-        //         catch(Exception ex)
-        //         {
-        //             return BadRequest(ex.Message);
-        //         }
-        //     }
+        [HttpPost("[action]")]
+        public IActionResult Users(User user)
+        {
+            if (user != null)
+            {
+                try
+                {
+                    _userService.CreateUser(user);
+                    return CreatedAtAction(nameof(Users), new { Id = user.Id }, _userService.GetUser(user.Id));
+                }
+                catch(Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
 
-        //     return BadRequest("user creation failed.");
+            return BadRequest("user creation failed.");
 
-        // }
+        }
     }
 }
