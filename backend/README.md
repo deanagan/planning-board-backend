@@ -20,6 +20,11 @@ docker commit -m "Add comment here" -a "[full name]" planningboard [docker hub u
 docker login
 docker push [docker hub username]/planningboard:latest
 
+# To run docker compose
+`docker-compose up --build`
+or
+`docker-compose build` followed by `docker-compose up`
+
 
 # EFCore Notes
 For tool updates, e.g. _The Entity Framework tools version '3.1.6' is older than that of the runtime '5.0.4'. Update the tools for the latest features and bug fixes._:
