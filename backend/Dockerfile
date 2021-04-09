@@ -16,4 +16,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build-env app/out ./
 RUN ls -la
+
 ENTRYPOINT ["dotnet", "planningboard.dll"]
