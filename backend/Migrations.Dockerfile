@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Api/planningboard.csproj", "./Api/"]
 COPY ["Setup.sh", "./Api/"]
-
+ENV ASPNETCORE_ENVIRONMENT Release
 RUN dotnet tool install --global dotnet-ef
 
 RUN dotnet restore "Api/planningboard.csproj"
