@@ -43,5 +43,11 @@ namespace Api.Data.Access
         {
             _dbSet.AddRange(parameters);
         }
+
+        public void Update(T parameter)
+        {
+            _dbSet.Update(parameter);
+        }
+
     }
 }

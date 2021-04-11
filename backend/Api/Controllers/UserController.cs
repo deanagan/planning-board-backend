@@ -61,7 +61,6 @@ namespace Api.Controllers
             }
         }
 
-        // // TODO: async-await eventually
         [HttpPost("[action]")]
         public IActionResult Users(User user)
         {
@@ -79,6 +78,32 @@ namespace Api.Controllers
             }
 
             return BadRequest("user creation failed.");
+        }
+
+        [HttpPut("[action]/{id}")]
+        public IActionResult Users(int id, User user)
+        {
+            if (user != null)
+            {
+                try
+                {
+                    user.Id = id;
+                    if (_userService.UpdateUser(user))
+                    {
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return BadRequest($"User with {id} not found.");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+
+            return BadRequest("User is null");
 
         }
     }

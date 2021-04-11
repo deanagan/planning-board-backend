@@ -57,31 +57,20 @@ namespace Api.Services
 
             _unitOfWork.Users.Add(newUser);
 
-            // var items = checkListView.ItemViews.Select(
-            //         itemView =>
-            //         new Item {
-            //             Name = itemView.Name,
-            //             Description = itemView.Description,
-            //         });
-
-            // var itemDetails = checkListView.ItemViews.Zip(items,
-            //         (itemView, item) =>
-            //         new ItemDetail {
-            //             Ready = itemView.IsReady,
-            //             Quantity = itemView.Quantity,
-            //             Notes = itemView.Notes,
-            //             Item = item
-            //         });
-
-            // _unitOfWork.CheckListToItemDetails.AddRange(itemDetails.Select(itemDetail =>
-            //         new CheckListToItemDetail {
-            //             ItemDetail = itemDetail,
-            //             CheckList = checkList
-            //         }));
-
             _unitOfWork.Save();
             user.Id = newUser.Id;
 
+        }
+
+        public bool UpdateUser(User user)
+        {
+            if (user != null)
+            {
+                _unitOfWork.Users.Update(user);
+                _unitOfWork.Save();
+            }
+
+            return user != null;
         }
 
     }

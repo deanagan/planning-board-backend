@@ -9,8 +9,6 @@ namespace Api.Data.Contexts
         private readonly AppDbContext _context;
         private DataRepository<User> _users;
         private DataRepository<Role> _roles;
-        // private DataRepository<ItemDetail> _itemDetails;
-        // private DataRepository<CheckListToItemDetail> _checkListToItemDetails;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -26,15 +24,6 @@ namespace Api.Data.Contexts
         {
             get { return _roles ?? (_roles = new DataRepository<Role>(_context));}
         }
-
-        // public IDataRepository<ItemDetail> ItemDetails
-        // {
-        //     get { return _itemDetails ?? (_itemDetails = new DataRepository<ItemDetail>(_context));}
-        // }
-        // public IDataRepository<CheckListToItemDetail> CheckListToItemDetails
-        // {
-        //     get { return _checkListToItemDetails ?? (_checkListToItemDetails = new DataRepository<CheckListToItemDetail>(_context));}
-        // }
 
         public void Save()
         {

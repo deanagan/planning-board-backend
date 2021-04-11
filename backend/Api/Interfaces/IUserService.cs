@@ -9,6 +9,7 @@ namespace Api.Interfaces
         IEnumerable<UserView> GetUsers();
         UserView GetUser(int id);
         void CreateUser(User user);
+        bool UpdateUser(User user);
     }
 
 }

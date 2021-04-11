@@ -13,5 +13,7 @@ namespace Api.Interfaces
         void Add(T parameter);
         void AddRange(IEnumerable<T> parameters);
 
+        void Update(T parameter);
+
     }
 }
