@@ -15,5 +15,7 @@ namespace Api.Interfaces
 
         void Update(T parameter);
 
+        void Delete(T parameter);
+
     }
 }

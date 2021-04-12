@@ -10,6 +10,8 @@ namespace Api.Interfaces
         UserView GetUser(int id);
         void CreateUser(User user);
         bool UpdateUser(User user);
+
+        bool DeleteUser(int id);
     }
 
 }
