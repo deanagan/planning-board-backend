@@ -73,5 +73,17 @@ namespace Api.Services
             return user != null;
         }
 
+        public bool DeleteUser(int id)
+        {
+            var user = _unitOfWork.Users.Get(id);
+            if (user != null)
+            {
+                _unitOfWork.Users.Delete(user);
+                _unitOfWork.Save();
+            }
+
+            return user != null;
+        }
+
     }
 }

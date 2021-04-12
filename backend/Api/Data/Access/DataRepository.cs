@@ -49,5 +49,10 @@ namespace Api.Data.Access
             _dbSet.Update(parameter);
         }
 
+        public void Delete(T parameter)
+        {
+            _dbSet.Remove(parameter);
+        }
+
     }
 }
