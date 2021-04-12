@@ -23,8 +23,8 @@ namespace Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Users()
+        [HttpGet("users")]
+        public IActionResult GetUsers()
         {
             try
             {
@@ -36,15 +36,15 @@ namespace Api.Controllers
 
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Users(int id)
+        [HttpGet("users/{id}")]
+        public IActionResult GetUser(int id)
         {
             try
             {
@@ -55,23 +55,23 @@ namespace Api.Controllers
                 }
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpPost("[action]")]
-        public IActionResult Users(User user)
+        [HttpPost("users")]
+        public IActionResult CreateUser(User user)
         {
             if (user != null)
             {
                 try
                 {
                     _userService.CreateUser(user);
-                    return CreatedAtAction(nameof(Users), new { Id = user.Id }, _userService.GetUser(user.Id));
+                    return CreatedAtAction(nameof(GetUsers), new { Id = user.Id }, _userService.GetUser(user.Id));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
@@ -80,8 +80,8 @@ namespace Api.Controllers
             return BadRequest("user creation failed.");
         }
 
-        [HttpPut("[action]/{id}")]
-        public IActionResult Users(int id, User user)
+        [HttpPut("users/{id}")]
+        public IActionResult UpdateUser(int id, User user)
         {
             if (user != null)
             {
@@ -97,14 +97,35 @@ namespace Api.Controllers
                         return BadRequest($"User with {id} not found.");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
             }
 
             return BadRequest("User is null");
+        }
 
+        [HttpDelete("users/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                if (_userService.DeleteUser(id))
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    // 401 if not authorised, else 404. 404 for now knowing we will
+                    // have authentication eventually.
+                    return NotFound("id does not exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
