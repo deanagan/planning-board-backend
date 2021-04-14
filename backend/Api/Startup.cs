@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Api.Services;
 using Api.Interfaces;
 
-namespace PlanningBoard
+namespace Api
 {
     public class Startup
     {
