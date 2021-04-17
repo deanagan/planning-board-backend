@@ -1,13 +1,47 @@
-using System;
+using System.Collections.Generic;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+
+using FluentAssertions;
+using FluentAssertions.Execution;
+using FluentAssertions.Collections;
+using FakeItEasy;
 using Xunit;
+using Moq;
+
+using Api.Interfaces;
+using Api.Controllers;
+using Api.Data.Models;
+
 
 namespace Api.Tests
 {
-    public class UnitTest1
+    public class UserControllerUnitTest
     {
+        private IUserService _userService = Mock.Of<IUserService>();
+        private ILogger<UserController> _fakeLogger = Mock.Of<ILogger<UserController>>();
+
         [Fact]
-        public void Test1()
+        public void ReturnOk_WhenDataExists()
         {
+
+            // Arrange
+            var controller = new UserController(_fakeLogger, _userService);
+            Mock.Get(_userService).Setup(svc => svc.GetUsers())
+                    .Returns(new List<UserView>{ A.Fake<UserView>(), A.Fake<UserView>() });
+
+            // Act
+            var result = controller.GetUsers() as ObjectResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.StatusCode.Should().Be(StatusCodes.Status200OK);
+                (result.Value as IEnumerable<UserView>).Should().NotBeEmpty().And.HaveCount(2);
+            }
+
 
         }
     }
