@@ -41,8 +41,6 @@ namespace Api.Tests
                 result.StatusCode.Should().Be(StatusCodes.Status200OK);
                 (result.Value as IEnumerable<UserView>).Should().NotBeEmpty().And.HaveCount(2);
             }
-
-
         }
     }
 }
