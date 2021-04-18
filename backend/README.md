@@ -39,4 +39,8 @@ To remove migration:
 To apply to database:
     `To do efcore migration, run:
     `dotnet ef database update`
-`
+
+
+# Testing Notes
+To run tests with verbosity enabled:
+`dotnet test -l:"console;verbosity=detailed"`
