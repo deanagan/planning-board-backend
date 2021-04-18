@@ -3,8 +3,9 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 
 COPY *.sln .
-COPY Api/*.csproj ./Api/
-COPY Api.Tests/*.csproj ./Api.Tests/
+COPY PlanningBoard.Api/*.csproj ./PlanningBoard.Api/
+COPY PlanningBoard.Api.UnitTests/*.csproj ./PlanningBoard.Api.UnitTests/
+COPY PlanningBoard.Api.IntegrationTests/*.csproj ./PlanningBoard.Api.IntegrationTests/
 
 RUN dotnet restore
 

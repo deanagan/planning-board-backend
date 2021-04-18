@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api\planningboard.csproj" />
+    <ProjectReference Include="..\PlanningBoard.Api\PlanningBoard.Api.csproj" />
   </ItemGroup>
 
 </Project>
