@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Api.Data.Models;
-using Api.Interfaces;
+using PlanningBoard.Api.Data.Models;
+using PlanningBoard.Api.Interfaces;
 using System.Text;
 
-namespace Api.Services
+namespace PlanningBoard.Api.Services
 {
     public class UserService : IUserService
     {

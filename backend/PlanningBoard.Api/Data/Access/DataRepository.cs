@@ -4,10 +4,10 @@ using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
-using Api.Interfaces;
-using Api.Data.Contexts;
+using PlanningBoard.Api.Interfaces;
+using PlanningBoard.Api.Data.Contexts;
 
-namespace Api.Data.Access
+namespace PlanningBoard.Api.Data.Access
 {
     public class DataRepository<T> : IDataRepository<T> where T : class
     {

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using Api.Data.Models;
+using PlanningBoard.Api.Data.Models;
 
-namespace Api.Data.Contexts
+namespace PlanningBoard.Api.Data.Contexts
 {
     public class AppDbContext : DbContext
     {

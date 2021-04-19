@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.Data.Sqlite;
 
-using Api.Data.Contexts;
+using PlanningBoard.Api.Data.Contexts;
 
-namespace Api.Tests
+namespace PlanningBoard.Api.IntegrationTests
 {
 
     public class BaseIntegrationTest// : IDisposable

@@ -1,6 +1,6 @@
 
 
-namespace Api.Data.Models
+namespace PlanningBoard.Api.Data.Models
 {
     public class UserView
     {

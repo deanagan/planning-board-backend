@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
-using Api.Interfaces;
-using Api.Data.Models;
+using PlanningBoard.Api.Interfaces;
+using PlanningBoard.Api.Data.Models;
 
 
-namespace Api.Controllers
+namespace PlanningBoard.Api.Controllers
 {
     [ApiController]
     [Route("v1/api")]

@@ -1,6 +1,6 @@
-using Api.Data.Models;
+using PlanningBoard.Api.Data.Models;
 
-namespace Api.Interfaces
+namespace PlanningBoard.Api.Interfaces
 {
     public interface IUnitOfWork
     {

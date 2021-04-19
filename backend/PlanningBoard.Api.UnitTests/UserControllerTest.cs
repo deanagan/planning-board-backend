@@ -11,12 +11,12 @@ using FakeItEasy;
 using Xunit;
 using Moq;
 
-using Api.Interfaces;
-using Api.Controllers;
-using Api.Data.Models;
+using PlanningBoard.Api.Interfaces;
+using PlanningBoard.Api.Controllers;
+using PlanningBoard.Api.Data.Models;
 
 
-namespace Api.Tests
+namespace PlanningBoard.Api.Tests
 {
     public class UserControllerUnitTest
     {

@@ -1,8 +1,8 @@
-using Api.Data.Models;
-using Api.Data.Access;
-using Api.Interfaces;
+using PlanningBoard.Api.Data.Models;
+using PlanningBoard.Api.Data.Access;
+using PlanningBoard.Api.Interfaces;
 
-namespace Api.Data.Contexts
+namespace PlanningBoard.Api.Data.Contexts
 {
     public class UnitOfWork : IUnitOfWork
     {

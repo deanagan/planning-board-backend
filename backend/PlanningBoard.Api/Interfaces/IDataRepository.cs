@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Api.Interfaces
+namespace PlanningBoard.Api.Interfaces
 {
     public interface IDataRepository<T> where T : class
     {

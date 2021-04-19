@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.TestHost;
 using System;
 
 
-namespace Api.Tests
+namespace PlanningBoard.Api.IntegrationTests
 {
     public class UserControllerIntegrationTest : BaseIntegrationTest
     {

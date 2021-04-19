@@ -13,15 +13,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-using Api.Data.Contexts;
-using Api.Data.Access;
+using PlanningBoard.Api.Data.Contexts;
+using PlanningBoard.Api.Data.Access;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-using Api.Services;
-using Api.Interfaces;
+using PlanningBoard.Api.Services;
+using PlanningBoard.Api.Interfaces;
 
-namespace Api
+namespace PlanningBoard.Api
 {
     public class Startup
     {
@@ -37,6 +37,7 @@ namespace Api
         {
 
             services.AddControllers();
+            services.AddHealthChecks();
             ConfigureDBContext(services);
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -76,6 +77,7 @@ namespace Api
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/healthcheck");
                 endpoints.MapControllers();
             });
         }
