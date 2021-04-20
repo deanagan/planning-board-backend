@@ -12,32 +12,36 @@ using System;
 
 namespace PlanningBoard.Api.IntegrationTests
 {
-    public class UserControllerIntegrationTest : BaseIntegrationTest
+    public class UserControllerIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
     {
+        private readonly HttpClient _client;
 
+        public UserControllerIntegrationTest(WebApplicationFactory<Startup> factory)
+        {
+            _client = factory.CreateDefaultClient();
+        }
 
         [Fact]
         public async Task ShouldReturnOk_WhenGettingAllUsers()
         {
-            // Arrange
+            var response = await _client.GetAsync("/v1/api/users");
 
-            // Act
-            var result = await GetClient().GetAsync("/v1/api/users");
+            response.EnsureSuccessStatusCode();
+        }
 
-            if (result.IsSuccessStatusCode)
-            {
-                var response = await result.Content.ReadAsStringAsync();
-            }
-            // Assert
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
+        [Fact]
+        public async Task ShouldReturnExpectedMediaType_WhenGettingAllUsers()
+        {
+            var response = await _client.GetAsync("/v1/api/users");
 
+            response.Content.Headers.ContentType.MediaType.Should().Be("application/json");
         }
 
         [Fact(Skip = "Skip for now")]
         public async void ReturnOk_WhenDoingGetUser()
         {
             // Act
-            var result = await GetClient().GetAsync("/v1/api/users/1");
+            var result = await _client.GetAsync("/v1/api/users/1");
 
             // Assert
             result.StatusCode.Should().Be(HttpStatusCode.OK);
