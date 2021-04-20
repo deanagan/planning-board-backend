@@ -14,11 +14,11 @@ using System;
 
 namespace PlanningBoard.Api.IntegrationTests
 {
-    public class UserControllerIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class UsersControllerIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public UserControllerIntegrationTest(WebApplicationFactory<Startup> factory)
+        public UsersControllerIntegrationTest(WebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateDefaultClient();
         }
@@ -40,7 +40,7 @@ namespace PlanningBoard.Api.IntegrationTests
         }
 
         [Fact]
-        public async Task ShouldReturnExpectedContent_WhenGettingAllUsers()
+        public async Task ShouldReturnExpectedHeader_WhenGettingAllUsers()
         {
             var response = await _client.GetAsync("/v1/api/users");
 
@@ -49,6 +49,14 @@ namespace PlanningBoard.Api.IntegrationTests
                 response.Content.Should().NotBeNull();
                 response.Content.Headers.ContentLength.Should().BeGreaterThan(0);
             }
+        }
+
+        [Fact]
+        public async Task ShouldReturnExpectedContent_WhenGettingAllUsers()
+        {
+            var response = await _client.GetStringAsync("/v1/api/users");
+
+            response.Should().NotBeNull();
         }
 
         [Fact(Skip = "Skip for now")]

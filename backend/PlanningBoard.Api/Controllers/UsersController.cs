@@ -11,19 +11,19 @@ using PlanningBoard.Api.Data.Models;
 namespace PlanningBoard.Api.Controllers
 {
     [ApiController]
-    [Route("v1/api")]
-    public class UserController : ControllerBase
+    [Route("v1/api/[controller]")]
+    public class UsersController : ControllerBase
     {
         private IUserService _userService;
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        public UsersController(ILogger<UsersController> logger, IUserService userService)
         {
             _logger = logger;
             _userService = userService;
         }
 
-        [HttpGet("users")]
+        [HttpGet]
         public IActionResult GetUsers()
         {
             try
@@ -43,7 +43,7 @@ namespace PlanningBoard.Api.Controllers
 
         }
 
-        [HttpGet("users/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
             try
@@ -61,7 +61,7 @@ namespace PlanningBoard.Api.Controllers
             }
         }
 
-        [HttpPost("users")]
+        [HttpPost]
         public IActionResult CreateUser(User user)
         {
             if (user != null)
@@ -80,7 +80,7 @@ namespace PlanningBoard.Api.Controllers
             return BadRequest("user creation failed.");
         }
 
-        [HttpPut("users/{id}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, User user)
         {
             if (user != null)
@@ -106,7 +106,7 @@ namespace PlanningBoard.Api.Controllers
             return BadRequest("User is null");
         }
 
-        [HttpDelete("users/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
             try

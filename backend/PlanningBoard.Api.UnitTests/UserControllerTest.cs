@@ -17,17 +17,17 @@ using PlanningBoard.Api.Data.Models;
 
 namespace PlanningBoard.Api.Tests
 {
-    public class UserControllerUnitTest
+    public class UsersControllerUnitTest
     {
         private IUserService _userService = Mock.Of<IUserService>();
-        private ILogger<UserController> _fakeLogger = Mock.Of<ILogger<UserController>>();
+        private ILogger<UsersController> _fakeLogger = Mock.Of<ILogger<UsersController>>();
 
         [Fact]
         public void ReturnOk_WhenDataExists()
         {
 
             // Arrange
-            var controller = new UserController(_fakeLogger, _userService);
+            var controller = new UsersController(_fakeLogger, _userService);
             Mock.Get(_userService).Setup(svc => svc.GetUsers())
                     .Returns(new List<UserView>{ A.Fake<UserView>(), A.Fake<UserView>() });
 
