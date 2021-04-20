@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
-using FluentAssertions.Collections;
 using FakeItEasy;
 using Xunit;
 using Moq;
