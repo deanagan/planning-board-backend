@@ -8,7 +8,7 @@ import DroidHeads from "@/core/DroidHeads.vue";
 import DroidBases from "@/core/DroidBases.vue";
 import DroidTorsos from "@/core/DroidTorsos.vue";
 import NotFound from "@/views/NotFound.vue";
-import SidebarDefault from "@/sidebars/SidebarDefault.vue";
+//import SidebarDefault from "@/sidebars/SidebarDefault.vue";
 import MealGallery from "@/gallery/ReportGallery.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import PlanningBoard from "@/views/PlanningBoard.vue";
@@ -29,8 +29,8 @@ export const router = new Router({
     //   }
     // },
     {
-      path: "/",
-      name: "Board",
+      path: "/home",
+      name: "PlanningBoard",
       components: {
         default: PlanningBoard
       }
@@ -98,19 +98,25 @@ export const router = new Router({
       path: "/gallery",
       name: "MealGallery",
       component: MealGallery
+    },
+    {
+      path: "/",
+      redirect: "/home"
     }
   ]
 });
 
-// router.beforeEach((to, _from, next) => {
-//   const publicPages = ["/login", "/"];
-//   const authRequired = !publicPages.includes(to.path);
-//   const loggedIn = localStorage.getItem("token");
+router.beforeEach((to, _from, next) => {
+  // Adding home route as public for now until backend is completed.
+  //const publicPages = ["/login"];
+  const publicPages = ["/login", "/"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("token");
 
-//   if (authRequired && !loggedIn) {
-//     console.log(to.name);
-//     next({ name: "LoginPage", query: { redirect: to.name } });
-//   } else {
-//     next();
-//   }
-// });
+  if (authRequired && !loggedIn) {
+    console.log(to.name);
+    next({ name: "LoginPage", query: { redirect: to.name } });
+  } else {
+    next();
+  }
+});
