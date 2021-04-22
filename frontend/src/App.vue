@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <nav-bar />
+    <nav-bar :currentEmail="currentEmail" />
     <div class="main">
       <!-- Main Content -->
       <div class="content">
-        <router-view />
+        <router-view @login-successful="onLogin" />
       </div>
     </div>
   </div>
@@ -17,6 +17,16 @@ import NavBar from "@/views/NavBar.vue";
 export default Vue.extend({
   components: {
     NavBar
+  },
+  data: function() {
+    return {
+      currentEmail: this.$cookies.get("email") || ""
+    };
+  },
+  methods: {
+    onLogin(email: string) {
+      this.currentEmail = email;
+    }
   }
 });
 </script>

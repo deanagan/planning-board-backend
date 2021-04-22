@@ -148,7 +148,7 @@ const message2 = [
   "Sortablejs"
 ];
 export default {
-  name: "hello",
+  name: "PlanningBoard",
   components: {
     draggable
   },

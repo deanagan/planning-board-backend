@@ -111,7 +111,7 @@ router.beforeEach((to, _from, next) => {
   //const publicPages = ["/login"];
   const publicPages = ["/login", "/"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("token");
+  const loggedIn = Vue.$cookies.isKey("token") && Vue.$cookies.isKey("email");
 
   if (authRequired && !loggedIn) {
     console.log(to.name);

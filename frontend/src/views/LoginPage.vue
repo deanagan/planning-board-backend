@@ -106,8 +106,8 @@ export default Vue.extend({
   created() {
     // reset login status
     this.form.email = "";
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
+    this.$cookies.remove("token");
+    this.$cookies.remove("email");
   },
   methods: {
     //...mapActions("account", ["login", "logout"]),
@@ -144,12 +144,14 @@ export default Vue.extend({
               jwt,
               user: { email }
             } = data;
-            localStorage.setItem("token", jwt);
-            localStorage.setItem("email", email);
+            this.$cookies.set("token", jwt);
+            this.$cookies.set("email", email);
+            this.$emit("login-successful", email);
 
-            const redirect = this.$route.query.redirect?.toString() || "Home";
+            //const redirect = this.$route.query.redirect?.toString() || "PlanningBoard";
 
-            this.$router.replace({ name: redirect });
+            //this.$router.replace({ name: redirect });
+            this.$router.replace({ name: "PlanningBoard" });
           })
           .catch(e => {
             console.log(e);
