@@ -9,7 +9,6 @@ import DroidBases from "@/core/DroidBases.vue";
 import DroidTorsos from "@/core/DroidTorsos.vue";
 import NotFound from "@/views/NotFound.vue";
 //import SidebarDefault from "@/sidebars/SidebarDefault.vue";
-import MealGallery from "@/gallery/ReportGallery.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import PlanningBoard from "@/views/PlanningBoard.vue";
 import DroidBuilder from "@/core/DroidBuilder.vue";
@@ -93,11 +92,6 @@ export const router = new Router({
           next({ name: "Build" });
         }
       }
-    },
-    {
-      path: "/gallery",
-      name: "MealGallery",
-      component: MealGallery
     },
     {
       path: "/",
