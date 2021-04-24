@@ -2,7 +2,7 @@
   <b-card
     style="max-width: 40rem;"
     title="Login Required"
-    class="mt-5 shadow p-3 mb-5 bg-white rounded"
+    class="mt-5 shadow p-3 mb-5 bg-white rounded mx-auto"
   >
     <ValidationObserver tag="form" ref="observer" v-slot="{ validate, valid }">
       <b-form
