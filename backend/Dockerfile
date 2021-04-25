@@ -20,4 +20,4 @@ WORKDIR /app
 COPY --from=build-env app/out ./
 RUN ls -la
 
-ENTRYPOINT ["dotnet", "planningboard.dll"]
+ENTRYPOINT ["dotnet", "PlanningBoard.Api.dll"]

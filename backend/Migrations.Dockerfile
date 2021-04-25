@@ -10,7 +10,7 @@ RUN dotnet restore "PlanningBoard.Api/PlanningBoard.Api.csproj"
 COPY . .
 WORKDIR "/src/PlanningBoard.Api/"
 
-RUN /root/.dotnet/tools/dotnet-ef migrations add InitialMigrations
+RUN /root/.dotnet/tools/dotnet-ef migrations add InitialMigrations -o ./Migrations -n PlanningBoard.Migrations
 
 
 RUN chmod +x ./Setup.sh
