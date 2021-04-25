@@ -1,7 +1,7 @@
 
 namespace PlanningBoard.Api.Data.Models
 {
-    public class TaskDetail
+    public class StoryDetail
     {
         public int Id { get; set; }
 
@@ -11,6 +11,6 @@ namespace PlanningBoard.Api.Data.Models
 
         public bool isDone { get; set; }
 
-        public Task Task { get; set; }
+        public Story Story { get; set; }
     }
 }

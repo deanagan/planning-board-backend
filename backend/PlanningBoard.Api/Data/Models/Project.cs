@@ -10,6 +10,6 @@ namespace PlanningBoard.Api.Data.Models
 
         public string Description { get; set;}
 
-        public ICollection<Task> Tasks { get; set;}
+        public ICollection<Story> Stories { get; set;}
     }
 }

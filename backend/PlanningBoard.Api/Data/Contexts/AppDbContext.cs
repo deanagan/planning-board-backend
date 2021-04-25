@@ -15,8 +15,8 @@ namespace PlanningBoard.Api.Data.Contexts
         public DbSet<Project> Projects { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<State> States { get; set; }
-        public DbSet<Task> Tasks { get; set; }
-        public DbSet<TaskDetail> TaskDetails { get; set; }
+        public DbSet<Story> Stories { get; set; }
+        public DbSet<StoryDetail> StoryDetails { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
