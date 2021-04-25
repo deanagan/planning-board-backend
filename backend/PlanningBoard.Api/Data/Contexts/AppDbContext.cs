@@ -12,7 +12,7 @@ namespace PlanningBoard.Api.Data.Contexts
 
         }
 
-        public DbSet<Project> Projects { get; set; }
+        public DbSet<Epic> Epics { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Story> Stories { get; set; }
