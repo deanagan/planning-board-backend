@@ -30,9 +30,16 @@ or
 For tool updates, e.g. _The Entity Framework tools version '3.1.6' is older than that of the runtime '5.0.4'. Update the tools for the latest features and bug fixes._:
     `dotnet tool update --global dotnet-ef`
 
-Add migration
-    `dotnet ef migrations add [migration name] [options]
+Sometimes, dotnet-ef isn't in the path. Check here ->  %USERPROFILE%\.dotnet\tools to make sure it is there. Otherwise, add to environment variable -> PATH
 
+Add migration
+    `dotnet ef migrations add [migration name] [options]`
+    Options can be -o <PATH> and -n <NAMESPACE>
+
+    For this project's initial migration, I did(note this was done from PlanningBoard.Api folder):
+    ```
+    dotnet ef migrations add Initial -o ./Data/Migrations -n Data.Migrations
+    ```
 To remove migration:
     `dotnet ef migrations remove`
 
@@ -40,6 +47,7 @@ To apply to database:
     `To do efcore migration, run:
     `dotnet ef database update`
 
+** Note that migrations need to be done where program.cs is.
 
 # Testing Notes
 To run tests with verbosity enabled:
