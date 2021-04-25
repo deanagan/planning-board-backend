@@ -10,7 +10,7 @@ namespace PlanningBoard.Api.Data.Models
 
         public State State { get; set; }
 
-        public Project Project { get; set; }
+        public Epic Epic { get; set; }
 
         public User User { get; set; }
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace PlanningBoard.Api.Data.Models
 {
-    public class Project
+    public class Epic
     {
         public int Id { get; set; }
 
