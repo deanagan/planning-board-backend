@@ -4,6 +4,8 @@ using PlanningBoard.Api.Data.Models;
 using PlanningBoard.Api.Interfaces;
 using System.Text;
 
+using System.Threading.Tasks;
+
 namespace PlanningBoard.Api.Services
 {
     public class UserService : IUserService
@@ -12,6 +14,23 @@ namespace PlanningBoard.Api.Services
         public UserService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IEnumerable<UserView>> GetUsersAsync()
+        {
+            var users = from user in await _unitOfWork.Users.GetAllAsync()
+                        join role in await _unitOfWork.Roles.GetAllAsync()
+                        on user.RoleId equals role.Id
+                        select new UserView
+                        {
+                            Id = user.Id,
+                            Name = user.Name,
+                            Email = user.Email,
+                            Hash = user.Hash,
+                            Role = role
+                        };
+
+            return users;
         }
 
         public IEnumerable<UserView> GetUsers()
@@ -31,9 +50,9 @@ namespace PlanningBoard.Api.Services
             return users;
         }
 
-        public UserView GetUser(int id)
+        public async Task<UserView> GetUser(int id)
         {
-            var user = _unitOfWork.Users.Get(id);
+            var user = await _unitOfWork.Users.GetAsync(id);
 
             return user != null ? new UserView
             {
@@ -41,7 +60,7 @@ namespace PlanningBoard.Api.Services
                 Name = user.Name,
                 Email = user.Email,
                 Hash = user.Hash,
-                Role = _unitOfWork.Roles.Get(user.RoleId)
+                Role = await _unitOfWork.Roles.GetAsync(user.RoleId)
             } : null;
         }
 
@@ -84,6 +103,5 @@ namespace PlanningBoard.Api.Services
 
             return user != null;
         }
-
     }
 }

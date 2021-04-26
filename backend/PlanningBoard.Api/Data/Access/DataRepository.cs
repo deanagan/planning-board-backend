@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -29,9 +29,20 @@ namespace PlanningBoard.Api.Data.Access
             return _dbSet;
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+
         public T Get(params object[] parameters)
         {
             return _dbSet.Find(parameters);
+        }
+
+        public async Task<T> GetAsync(params object[] parameters)
+        {
+            return await _dbSet.FindAsync(parameters);
         }
 
         public void Add(T parameter)

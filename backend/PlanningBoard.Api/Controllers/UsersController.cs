@@ -24,11 +24,11 @@ namespace PlanningBoard.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
             try
             {
-                var result = _userService.GetUsers();
+                var result = await _userService.GetUsersAsync();
                 if (result == null)
                 {
                     return NoContent();
@@ -44,11 +44,11 @@ namespace PlanningBoard.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public async Task<IActionResult> GetUser(int id)
         {
             try
             {
-                var result = _userService.GetUser(id);
+                var result = await _userService.GetUser(id);
                 if (result == null)
                 {
                     return NoContent();
