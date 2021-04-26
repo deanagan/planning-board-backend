@@ -1,3 +1,5 @@
+[![.NET](https://github.com/deanagan/planning-board-backend/actions/workflows/dotnet.yml/badge.svg)](https://github.com/deanagan/planning-board-backend/actions/workflows/dotnet.yml)
+
 # Docker image created with:
 docker build --pull -t planningboard .
 
