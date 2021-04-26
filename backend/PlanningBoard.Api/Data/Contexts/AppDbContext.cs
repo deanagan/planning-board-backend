@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using PlanningBoard.Api.Data.Models;
 
 namespace PlanningBoard.Api.Data.Contexts
