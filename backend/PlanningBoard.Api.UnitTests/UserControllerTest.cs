@@ -8,7 +8,6 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using FakeItEasy;
 using Xunit;
-using Moq;
 
 using PlanningBoard.Api.Interfaces;
 using PlanningBoard.Api.Controllers;
@@ -19,20 +18,20 @@ namespace PlanningBoard.Api.Tests
 {
     public class UsersControllerUnitTest
     {
-        private IUserService _userService = Mock.Of<IUserService>();
-        private ILogger<UsersController> _fakeLogger = Mock.Of<ILogger<UsersController>>();
+        private IUserService _userService = A.Fake<IUserService>();
+        private ILogger<UsersController> _fakeLogger = A.Fake<ILogger<UsersController>>();
 
         [Fact]
-        public void ReturnOk_WhenDataExists()
+        public async void ReturnOk_WhenDataExists()
         {
-
             // Arrange
             var controller = new UsersController(_fakeLogger, _userService);
-            Mock.Get(_userService).Setup(svc => svc.GetUsers())
-                    .Returns(new List<UserView>{ A.Fake<UserView>(), A.Fake<UserView>() });
+            var fakeUser1 = A.Fake<UserView>();
+            var fakeUser2 = A.Fake<UserView>();
+            A.CallTo(() => _userService.GetUsersAsync()).Returns(new List<UserView>{ fakeUser1, fakeUser2 });
 
             // Act
-            var result = controller.GetUsers() as ObjectResult;
+            var result = await controller.GetUsers() as ObjectResult;
 
             // Assert
             using (new AssertionScope())
