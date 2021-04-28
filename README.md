@@ -27,6 +27,8 @@ docker push [docker hub username]/planningboard:latest
 or
 `docker-compose build` followed by `docker-compose up`
 
+# To run sql server as a container (note password may vary)
+`docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=1Secure*Password1" -p 14331:1433 -d mcr.microsoft.com/mssql/server:2019-latest`
 
 # EFCore Notes
 For tool updates, e.g. _The Entity Framework tools version '3.1.6' is older than that of the runtime '5.0.4'. Update the tools for the latest features and bug fixes._:
