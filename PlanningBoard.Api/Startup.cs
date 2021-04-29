@@ -55,7 +55,7 @@ namespace PlanningBoard.Api
 
         public virtual void ConfigureDBContext(IServiceCollection services)
         {
-            var connection = Configuration["ConnectionStrings:DefaultConnection"];
+            var connection = Configuration["ConnectionStrings:DefaultConnection"];            
 	        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
         }
 
@@ -80,6 +80,12 @@ namespace PlanningBoard.Api
                 endpoints.MapHealthChecks("/healthcheck");
                 endpoints.MapControllers();
             });
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }
