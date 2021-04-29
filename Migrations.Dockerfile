@@ -1,3 +1,6 @@
+# This docker file for migrations isn't used anymore but keeping it for
+# reference
+
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
 WORKDIR /src

@@ -35,7 +35,6 @@ namespace PlanningBoard.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddHealthChecks();
             ConfigureDBContext(services);
@@ -55,8 +54,20 @@ namespace PlanningBoard.Api
 
         public virtual void ConfigureDBContext(IServiceCollection services)
         {
-            var connection = Configuration["ConnectionStrings:DefaultConnection"];            
-	        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+
+            var server = Configuration["DBServer"];
+            var port = Configuration["DBPort"];
+            var user = Configuration["DBUser"];
+            var password = Configuration["DBPassword"];
+            var database = Configuration["Database"];
+            var trusted = Configuration["TrustedConnection"];
+
+            var serverPort = (port != null) ? $"Server={server},{port};" : $"Server={server};";
+            var userPassword = (user != null && password != null) ? $"User ID={user};Password={password};" : string.Empty;
+            var trustedConnection = trusted != null ? "Trusted_Connection=True;" : string.Empty;
+
+            var connection = $"{serverPort}Initial Catalog={database};{userPassword}{trustedConnection}ConnectRetryCount=0;Integrated Security=false;";
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +97,7 @@ namespace PlanningBoard.Api
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.Migrate();
             }
+
         }
     }
 }

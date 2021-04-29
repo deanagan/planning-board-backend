@@ -9,9 +9,15 @@ services:
     ports:
       - "8090:80"
     depends_on:
-      - migrations
-      - db
-  db:
+      - sqlserver
+    environment:
+      DBServer: "sqlserver"
+      DBPort: 14331
+      DBUser: "sa"
+      DBPassword: "1Secure*Password1"
+      Database: "planningboard"
+
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       SA_PASSWORD: "1Secure*Password1"
@@ -22,9 +28,3 @@ services:
       - ./sqlvolume/secrets:/var/opt/mssql/secrets
     ports:
     - "14331:1433"
-    depends_on:
-      - migrations
-  migrations:
-    build:
-      context: .
-      dockerfile: Migrations.Dockerfile
