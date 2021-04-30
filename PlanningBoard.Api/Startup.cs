@@ -36,6 +36,7 @@ namespace PlanningBoard.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore );
             services.AddHealthChecks();
             ConfigureDBContext(services);
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
@@ -54,7 +55,7 @@ namespace PlanningBoard.Api
 
         public virtual void ConfigureDBContext(IServiceCollection services)
         {
-            var connection = Configuration["ConnectionStrings:DefaultConnection"];            
+            var connection = Configuration["ConnectionStrings:DefaultConnection"];
 	        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
         }
 
