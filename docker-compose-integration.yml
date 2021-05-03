@@ -1,33 +1,24 @@
+# /docker-compose-integration.yml
 version: '3.4'
 
 services:
-  planningboard:
-    image: planningboard
+  integration:
     build:
       context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8090:80"
+      dockerfile: Integration.Dockerfile
+    entrypoint: dotnet test -l:"console;verbosity=detailed"
     depends_on:
+    #   - web
       - db
-      - integration-test
-  integration-test:
-    image: planningboard
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/src
-      - ../test:/test
-    working_dir: /src
-    command:
-      [
-        "ls"
-      ]
-    ports:
-      - "8091:80"
-    depends_on:
-      - db
+#   web:
+#     build: .
+#     ports:
+#       - 5000:5000
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Integration
+#     #entrypoint: dotnet /app/PlanningBoard.Api.dll
+#     depends_on:
+#       - db
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     user: root
