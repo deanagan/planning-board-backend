@@ -40,5 +40,25 @@ namespace PlanningBoard.Api.Tests
                 (result.Value as IEnumerable<UserView>).Should().NotBeEmpty().And.HaveCount(2);
             }
         }
+
+        [Fact]
+        public async void ReturnOk_WhenDataExistsForOneUser()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser1 = A.Fake<UserView>();
+            var fakeUser2 = A.Fake<UserView>();
+            A.CallTo(() => _userService.GetUsersAsync()).Returns(new List<UserView>{ fakeUser1, fakeUser2 });
+
+            // Act
+            var result = await controller.GetUser(fakeUser1.Id) as ObjectResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.StatusCode.Should().Be(StatusCodes.Status200OK);
+                result.Value.Should().Equals(fakeUser1);
+            }
+        }
     }
 }
