@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# This file is unused and kept for reference
 set -e
 
 until /root/.dotnet/tools/dotnet-ef database update --no-build; do
