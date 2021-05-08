@@ -3,9 +3,9 @@ using PlanningBoard.Api.Data.Models;
 
 namespace PlanningBoard.Api.Data.Contexts
 {
-    public class AppDbContext : DbContext
+    public class TestDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public TestDbContext(DbContextOptions<TestDbContext> options)
         : base(options)
         {
         }

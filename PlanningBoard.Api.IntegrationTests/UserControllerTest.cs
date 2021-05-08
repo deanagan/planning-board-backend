@@ -8,6 +8,8 @@ using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Hosting;
+
 
 using System;
 using System.Net.Http;
@@ -22,17 +24,17 @@ using System.Net.Http.Json;
 
 namespace PlanningBoard.Api.IntegrationTests
 {
-    public class UsersControllerIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class UsersControllerIntegrationTest : IClassFixture<TestWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
-        private WebApplicationFactory<Startup> _factory;
+        private TestWebApplicationFactory<Startup> _factory;
 
         private IUnitOfWork _fakeUnitOfWork;
         private User _dummyUser2;
         private User _dummyUser1;
         private Role _dummyRole;
 
-        public UsersControllerIntegrationTest(WebApplicationFactory<Startup> factory)
+        public UsersControllerIntegrationTest(TestWebApplicationFactory<Startup> factory)
         {
             _fakeUnitOfWork = A.Fake<IUnitOfWork>(uow => uow.Implements<IUnitOfWork>());
             _factory = factory;
@@ -40,6 +42,7 @@ namespace PlanningBoard.Api.IntegrationTests
             _client = _factory.WithWebHostBuilder(builder =>
             {
                 builder.UseSetting("https_port", "5001");
+                builder.UseStartup<TestStartup>();
                 builder.ConfigureTestServices(services =>
                 {
                     services.AddSingleton(typeof(IUnitOfWork), _fakeUnitOfWork);

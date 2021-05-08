@@ -36,7 +36,7 @@ namespace PlanningBoard.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore );
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddHealthChecks();
             ConfigureDBContext(services);
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
@@ -47,8 +47,7 @@ namespace PlanningBoard.Api
             });
 
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+
 
             services.AddScoped<IUserService, UserService>();
         }
@@ -56,7 +55,9 @@ namespace PlanningBoard.Api
         public virtual void ConfigureDBContext(IServiceCollection services)
         {
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
-	        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,13 +81,16 @@ namespace PlanningBoard.Api
                 endpoints.MapHealthChecks("/healthcheck");
                 endpoints.MapControllers();
             });
+            MigrateDB(app);
+        }
 
+        protected virtual void MigrateDB(IApplicationBuilder app)
+        {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.Migrate();
             }
-
         }
     }
 }
