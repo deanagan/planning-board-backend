@@ -60,5 +60,61 @@ namespace PlanningBoard.Api.Tests
                 result.Value.Should().Equals(fakeUser1);
             }
         }
+
+        [Fact]
+        public void ReturnContentCreated_WhenOneUserAdded()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser = A.Fake<User>();
+
+            // Act
+            var result = controller.CreateUser(fakeUser) as ObjectResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.StatusCode.Should().Be(StatusCodes.Status201Created);
+            }
+        }
+
+        [Fact]
+        public void ReturnNoContent_WhenOneUserUpdated()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser = A.Fake<User>();
+            A.CallTo(() => _userService.UpdateUser(fakeUser)).Returns(true);
+
+            // Act
+            var result = controller.UpdateUser(fakeUser.Id, fakeUser) as NoContentResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.StatusCode.Should().Be(StatusCodes.Status204NoContent);
+                A.CallTo(() => _userService.UpdateUser(fakeUser)).MustHaveHappenedOnceExactly();
+            }
+        }
+
+        [Fact]
+        public void ReturnBadRequest_WhenNoUserUpdated()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser = A.Fake<User>();
+            fakeUser.Id = 23;
+            A.CallTo(() => _userService.UpdateUser(fakeUser)).Returns(false);
+
+            // Act
+            var result = controller.UpdateUser(17, fakeUser) as BadRequestObjectResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+                A.CallTo(() => _userService.UpdateUser(fakeUser)).MustHaveHappenedOnceExactly();
+            }
+        }
     }
 }
