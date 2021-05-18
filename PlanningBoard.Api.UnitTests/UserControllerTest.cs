@@ -116,5 +116,26 @@ namespace PlanningBoard.Api.Tests
                 A.CallTo(() => _userService.UpdateUser(fakeUser)).MustHaveHappenedOnceExactly();
             }
         }
+
+        [Fact]
+        public void ReturnNoContent_WhenUserDeleted()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser = A.Fake<User>();
+            fakeUser.Id = 23;
+            A.CallTo(() => _userService.DeleteUser(1)).Returns(true);
+
+            // Act
+            var result = controller.DeleteUser(1) as NoContentResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.Should().NotBeNull();
+                result.StatusCode.Should().Be(StatusCodes.Status204NoContent);
+                A.CallTo(() => _userService.DeleteUser(1)).MustHaveHappenedOnceExactly();
+            }
+        }
     }
 }
