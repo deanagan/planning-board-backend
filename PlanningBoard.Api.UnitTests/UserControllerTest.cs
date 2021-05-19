@@ -137,5 +137,26 @@ namespace PlanningBoard.Api.Tests
                 A.CallTo(() => _userService.DeleteUser(1)).MustHaveHappenedOnceExactly();
             }
         }
+
+        [Fact]
+        public void ReturnNotFound_WhenUserDeletedDoesNotExist()
+        {
+            // Arrange
+            var controller = new UsersController(_fakeLogger, _userService);
+            var fakeUser = A.Fake<User>();
+            fakeUser.Id = 23;
+            A.CallTo(() => _userService.DeleteUser(1)).Returns(false);
+
+            // Act
+            var result = controller.DeleteUser(1) as NotFoundObjectResult;
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.Should().NotBeNull();
+                result.StatusCode.Should().Be(StatusCodes.Status404NotFound);
+                A.CallTo(() => _userService.DeleteUser(1)).MustHaveHappenedOnceExactly();
+            }
+        }
     }
 }
