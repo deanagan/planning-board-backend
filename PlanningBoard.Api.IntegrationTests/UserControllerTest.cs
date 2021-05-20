@@ -21,6 +21,8 @@ using FakeItEasy;
 using PlanningBoard.Api.Interfaces;
 using PlanningBoard.Api.Data.Models;
 using System.Net.Http.Json;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace PlanningBoard.Api.IntegrationTests
 {
@@ -141,5 +143,26 @@ namespace PlanningBoard.Api.IntegrationTests
                 result.Role.Should().BeEquivalentTo(_dummyUser1.Role);
             }
         }
+
+        [Fact]
+        public async void ReturnContentCreated_WhenCreatingUser()
+        {
+            // Arrange
+            var user = new User
+            {
+                Name = "Steve Rogers",
+                RoleId = 2,
+                Email = "steve.rogers@planningboard.io",
+            };
+
+            // Act
+            var result = await _client.PostAsync("users"
+                , new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8
+                , "application/json"));
+
+            // Assert
+            result.StatusCode.Should().Be(HttpStatusCode.Created);
+        }
+
     }
 }
