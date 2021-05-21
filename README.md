@@ -37,7 +37,14 @@ For tool updates, e.g. _The Entity Framework tools version '3.1.6' is older than
 Sometimes, dotnet-ef isn't in the path. Check here ->  %USERPROFILE%\.dotnet\tools to make sure it is there. Otherwise, add to environment variable -> PATH
 After updating the environment variable path, you can use `refreshenv`, which comes with chocolatey.
 
-Add migration
+## Dropping Database
+
+To dry-run which database will be dropped:
+  `dotnet ef database drop --dry-run --project PlanningBoard.Api`
+
+
+
+## Add migration
     `dotnet ef migrations add [migration name] [options]`
     Options can be -o <PATH> and -n <NAMESPACE>
 
