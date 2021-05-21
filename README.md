@@ -35,6 +35,7 @@ For tool updates, e.g. _The Entity Framework tools version '3.1.6' is older than
     `dotnet tool update --global dotnet-ef`
 
 Sometimes, dotnet-ef isn't in the path. Check here ->  %USERPROFILE%\.dotnet\tools to make sure it is there. Otherwise, add to environment variable -> PATH
+After updating the environment variable path, you can use `refreshenv`, which comes with chocolatey.
 
 Add migration
     `dotnet ef migrations add [migration name] [options]`
