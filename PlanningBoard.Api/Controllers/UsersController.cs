@@ -69,7 +69,7 @@ namespace PlanningBoard.Api.Controllers
                 try
                 {
                     _userService.CreateUser(user);
-                    return CreatedAtAction(nameof(GetUsers), new { Id = user.Id }, _userService.GetUser(user.Id));
+                    return CreatedAtAction(nameof(GetUsers), new { Id = user.Id }, user);
                 }
                 catch (Exception ex)
                 {

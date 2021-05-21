@@ -36,7 +36,6 @@ namespace PlanningBoard.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddHealthChecks();
             ConfigureDBContext(services);
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));

@@ -64,7 +64,7 @@ namespace PlanningBoard.Api.Services
             } : null;
         }
 
-        public void CreateUser(User user)
+        public async void CreateUser(User user)
         {
             var newUser = new User
             {
@@ -74,11 +74,11 @@ namespace PlanningBoard.Api.Services
                 Hash = "todo123"
             };
 
-            _unitOfWork.Users.Add(newUser);
+            await _unitOfWork.Users.AddAsync(newUser);
 
             _unitOfWork.Save();
             user.Id = newUser.Id;
-
+            user.Role = await _unitOfWork.Roles.GetAsync(user.RoleId);
         }
 
         public bool UpdateUser(User user)

@@ -50,6 +50,12 @@ namespace PlanningBoard.Api.Data.Access
             _dbSet.Add(parameter);
         }
 
+        public Task AddAsync(T parameter)
+        {
+            _dbSet.AddAsync(parameter);
+            return Task.CompletedTask;
+        }
+
         public void AddRange(IEnumerable<T> parameters)
         {
             _dbSet.AddRange(parameters);

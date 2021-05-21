@@ -17,6 +17,8 @@ namespace PlanningBoard.Api.Interfaces
         void Add(T parameter);
         void AddRange(IEnumerable<T> parameters);
 
+        Task AddAsync(T parameter);
+
         void Update(T parameter);
 
         void Delete(T parameter);
